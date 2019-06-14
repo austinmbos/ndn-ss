@@ -8,6 +8,9 @@
 #include <ndn-cxx/security/key-chain.hpp>
 
 #include <iostream>
+#include <stdio.h>
+
+#include "func.h"
 
 namespace ndn {
 namespace examples {
@@ -15,6 +18,11 @@ namespace examples {
 class Mservice : noncopyable
 {
 public:
+  void
+  init()
+  {
+    pub_key_a = func::read_file((char*)"keys/pubkey_a.pub");
+  }
   void
   run()
   {
@@ -51,6 +59,8 @@ private:
     using namespace std;
     
     cout << "[SS] Received interest\n";
+
+    /* 'forward' the intereset */
     cout << "[SS] Sending interest to main producer\n";
     send_I();
 
@@ -62,15 +72,16 @@ private:
 
     static const std::string content = "HELLO KITTY";
 
+
     // Create Data packet
     shared_ptr<Data> data = make_shared<Data>();
     data->setName(dataName);
-    data->setFreshnessPeriod(10_s); // 10 seconds
-    data->setContent(reinterpret_cast<const uint8_t*>(content.data()), content.size());
+    data->setFreshnessPeriod(1_s); // 10 seconds
+    data->setContent(reinterpret_cast<const uint8_t*>(m_data.getContent().value()), 
+        m_data.getContent().size());
 
     m_keyChain.sign(*data);
 
-    //std::cout << ">> D: " << *data << std::endl;
     m_face.put(*data);
   }
 
@@ -85,12 +96,28 @@ private:
   }
 
 /*************************************************************/
+  /* recieving a data packet from producer
+   * verify the signature here
+   */
   void
   onData(const Interest& interest, const Data& data)
   {
     using namespace std;
+    m_data = data;
 
-    cout << "[*] Received data packet back (from main producer)\n";
+    char *c = (char*)data.getContent().value();
+    char *content = (char*)malloc(6);
+    for(int i = 0; i < 5; i++) 
+      content[i] = c[i];
+    content[5] = '\0';
+
+    printf("[content] %s\n",content);
+    char *sig = c + 5;
+    printf("[sig    ] %s\n",sig);
+    bool is_good = func::verify_sig(pub_key_a,content,sig);
+
+    cout << "is_good: " << is_good << endl;
+
   }
 
   void
@@ -107,13 +134,15 @@ private:
   }
 
 private:
-  Face m_face_I;
+  Face m_face_I; // 'forward' interest to producer
+  Data m_data;   // ' save the data recieved from producer to send to consumer
 
 /***************************************************************/
 
 private:
-  Face m_face;
-  KeyChain m_keyChain;
+  char *pub_key_a;
+  Face m_face;  // for producer
+  KeyChain m_keyChain;  
 };
 
 } // namespace examples
@@ -123,6 +152,7 @@ int
 main(int argc, char** argv)
 {
   ndn::examples::Mservice producer;
+  producer.init();
   try {
     producer.run();
   }

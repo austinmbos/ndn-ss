@@ -33,6 +33,7 @@ private:
   {
     using namespace std;
     cout << "[*] Received data packet back\n";
+    cout << "[*] Content\n" << data.getContent().value() << "\n";
   }
 
   void
