@@ -7,6 +7,7 @@
 #include <ndn-cxx/security/key-chain.hpp>
 #include <ndn-cxx/security/signing-info.hpp>
 #include <ndn-cxx/security/v2/key-chain.hpp>
+#include <ndn-cxx/security/pib/pib-sqlite3.hpp>
 
 #include <iostream>
 #include <fstream>
@@ -27,19 +28,20 @@ int main(int argc, char** argv)
 {
   cout << "[*] Testing keys\n";
   Name key_name = "/priv-key";
+  Name n_name = "/test";
+  Name i_name ="/name";
+
+  PibSqlite3 pib;
 
   char *priv_key = func::read_file((char*)"privkey_a.pem");
   char *pub_key  = func::read_file((char*)"pubkey_a.pub");
 
-  bool is_good;
+  /* create and init a pib */
+  pib.addKey(i_name,key_name,(uint8_t*)priv_key,strlen(priv_key));
+  pib.setTpmLocator("/home/abos/.ndn");
 
-  char *data = (char*)"hello";
-  
-  char *sig = func::sign_message(priv_key,data);
-
-  is_good = func::verify_sig(pub_key,data,sig);
-
-  cout << is_good << endl;
-    
+  KeyChain k_chain;
+  Identity i = k_chain.createIdentity(n_name);
+  pib.addIdentity(n_name);
 
 }
