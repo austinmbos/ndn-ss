@@ -6,6 +6,10 @@ to make reproduction as easy as possible.
 
 ### side notes ( for me )
 - Dockerhub can be used to store these images.
+- Things I need to figure out:
+	- What structure should the app be:
+	- A producer
+	- Or different logic
 
 
 ## Getting started
@@ -43,9 +47,9 @@ TODO
 ## Orchestration of ndn microservices ( later step )
 - TODO:
 - ideas for tools to use for ochestration: 
-* docker swarm
-* kubernetes
-* might need custom since ndn?
+	* docker swarm
+	* kubernetes
+	* might need custom since ndn?
 
 
 ## Notes/Questions for ndn docker application ( microservices )
