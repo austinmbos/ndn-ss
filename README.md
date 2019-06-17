@@ -4,6 +4,17 @@
 to make reproduction as easy as possible.
 - Notes and questions at the bottom of README
 
+### side notes ( for me )
+- Dockerhub can be used to store these images.
+
+
+## Getting started
+- Install docker ( the easy way, NOTE: not the official docker way to install )
+```
+sudo apt install docker.io
+```
+- TODO: switch to the official docker way
+
 
 ## Steps to create an 'ndn-ubuntu' container ready to go for ndn applications
 - Create a default base docker ubuntu image
@@ -25,17 +36,19 @@ TODO
 ## Connecting application inside container to host NFD
 - TODO, if possible
 
+
+## saving your docker image/microservice for re-use
+- TODO: ( using dockerhub or just keeping images local )
+
 ## Orchestration of ndn microservices ( later step )
-- TODO
+- TODO:
 - ideas for tools to use for ochestration: 
 * docker swarm
 * kubernetes
 * might need custom since ndn?
 
 
-
 ## Notes/Questions for ndn docker application ( microservices )
-
 
 1. What base to use?
 * need a base image with necessary deps

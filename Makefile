@@ -1,5 +1,3 @@
-
-
 all: consumer producer mservice
 
 consumer: consumer.cpp func.o
