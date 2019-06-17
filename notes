@@ -1,9 +1,0 @@
-[ notes for ndn docker application ]
-
-1. What base to use?
-  a. need a base image with necessary deps
-  b. an ubuntu image with everything already packaged
-
-2. How to make sure application runs in container
-
-3. How to register with NFD on host machine
