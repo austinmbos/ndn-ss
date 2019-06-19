@@ -24,6 +24,7 @@ to make reproduction as easy as possible.
 producer.
 - Test with correct signature and incorrect signature
 - Once this works, place into a docker container
+- Two containers with nfd on both sides of the microservice chain
 
 
 ## Getting started
@@ -36,6 +37,8 @@ sudo apt install docker.io
 
 
 ## Steps to create an 'ndn-ubuntu' container ready to go for ndn applications
+
+- TODO: Substitue the following with a dockerfile and a command to create
 
 - Create a default base docker ubuntu image ( default: pull with tag 'latest' )
 ```
