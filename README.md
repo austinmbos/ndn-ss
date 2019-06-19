@@ -1,10 +1,16 @@
 # ndn-ss ( ndn micro services )
+
 - Documentation on how to get ndn applications to run as microservices.
 - As things progress, their notes will be taken here, including commands
 to make reproduction as easy as possible.
 - Notes and questions at the bottom of README
+- Questions and topics are kept in a google doc
+- services will have an ndn container at the entry and exit
+- communcation between containers will happen with traditional IP
+
 
 ### side notes ( for me )
+
 - Dockerhub can be used to store these images.
 - Things I need to figure out:
 	- What structure should the app be:
@@ -12,7 +18,16 @@ to make reproduction as easy as possible.
 	- Or different logic
 
 
+## Working on right now
+
+- Get middle entity ( microservice ) to verify the signature of the original 
+producer.
+- Test with correct signature and incorrect signature
+- Once this works, place into a docker container
+
+
 ## Getting started
+
 - Install docker ( the easy way, NOTE: not the official docker way to install )
 ```
 sudo apt install docker.io
@@ -21,12 +36,19 @@ sudo apt install docker.io
 
 
 ## Steps to create an 'ndn-ubuntu' container ready to go for ndn applications
-- Create a default base docker ubuntu image
+
+- Create a default base docker ubuntu image ( default: pull with tag 'latest' )
+```
+docker pull ubuntu
+```
+
 - Run the necessary commands inside the container set up an ndn environment
 ```
 TODO
 ```
-- TODO: create a script to simply the commands run inside container on start
+
+- TODO: create a script to simply the commands run inside container on start.
+Dockerfile?
 
 
 ## Creating a docker image ( That holds your application/microservice )
