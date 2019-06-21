@@ -16,18 +16,19 @@ to make reproduction as easy as possible.
 	- What structure should the app be:
 	- A producer
 	- Or different logic
+- What will communication between containers look like ( json?, custom
+  serializer?)
 
 
 ## Working on right now
 
-- Get middle entity ( microservice ) to verify the signature of the original 
-producer.
-- Test with correct signature and incorrect signature
-- Once this works, place into a docker container
-- Two containers with nfd on both sides of the microservice chain
-
+- learning docker
+- Building nfd containers
 
 ## Getting started
+
+- Setting up entry/exit points for microservices ( NFD containers )
+    - These are how ndn traffic goes into the microservies ( as of now )
 
 - Install docker ( the easy way, NOTE: not the official docker way to install )
 ```
