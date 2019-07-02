@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 # slightly modified version of nfd-stop
 # sudo removed and pkill subbed in for killall
