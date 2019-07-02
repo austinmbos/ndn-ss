@@ -1,29 +1,28 @@
 # ndn-ss ( ndn micro services )
 
-- Documentation on how to get ndn applications to run as microservices.
-- As things progress, their notes will be taken here, including commands
-to make reproduction as easy as possible.
 - Notes and questions at the bottom of README
-- Questions and topics are kept in a google doc
-- services will have an ndn container at the entry and exit
+- Questions and topics are kept in a google doc ( add link here ? )
+- services will have an ndn container at the entry and exit running NFD
 - communcation between containers will happen with traditional IP
+- Each service/container has their own dir to keep things clean. Change into the
+  service dir that is desired and read the README for more info
+
 
 
 ### side notes ( for me )
 
-- Dockerhub can be used to store these images.
-- Things I need to figure out:
-	- What structure should the app be:
-	- A producer
-	- Or different logic
-- What will communication between containers look like ( json?, custom
-  serializer?)
+- Dockerhub can be used to store these images or images can be tar'ed and
+  shared.
+- Need communication between microservices. 
+	- For prototyping thinking flask web servers and json
 
 
 ## Working on right now
 
-- learning docker
-- Building nfd containers
+- Building/Testing nfd containers
+- Building first microservice ( signature verification )
+- How to take initial interest, pass data through service chain and return back
+  to the user
 
 ## Getting started
 
@@ -37,38 +36,10 @@ sudo apt install docker.io
 - TODO: switch to the official docker way
 
 
-## Steps to create an 'ndn-ubuntu' container ready to go for ndn applications
-
-- TODO: Substitue the following with a dockerfile and a command to create
-
-- Create a default base docker ubuntu image ( default: pull with tag 'latest' )
-```
-docker pull ubuntu
-```
-
-- Run the necessary commands inside the container set up an ndn environment
-```
-TODO
-```
-
-- TODO: create a script to simply the commands run inside container on start.
-Dockerfile?
-
-
-## Creating a docker image ( That holds your application/microservice )
-- Using the previously created 'ndn-ubuntu' image
-- Example Dockerfile for you application
-- ??? Can the application be a producer with no NFD inside container ???
-```
-TODO
-```
-
-## Connecting application inside container to host NFD
-- TODO, if possible
-
 
 ## saving your docker image/microservice for re-use
 - TODO: ( using dockerhub or just keeping images local )
+- When images are created locally, they are there for re-use
 
 
 ## Orchestration of ndn microservices ( later step )
@@ -81,12 +52,11 @@ TODO
 
 ## Notes/Questions for ndn docker application ( microservices )
 
-1. What base to use?
-* need a base image with necessary deps
-* an ubuntu image with everything already packaged
+1. How to make sure application runs in container?
 
-2. How to make sure application runs in container?
+2. How to register with NFD on host machine? ( if microservice is an ndn
+   application )
 
-3. How to register with NFD on host machine?
+- Additional notes on each container or service can be found in its
+  corresponding dir under the docker/ dir
 
-4. Does the application inside the container necessarily have to be a producer?

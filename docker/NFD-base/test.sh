@@ -5,11 +5,11 @@
 #  build and ndn base image
 #  build on ubuntu 
 #  contains: ( pun intented )
-#    ndn-cxx
-#    obviously all deps for ndn-cxx
+#    NFD
+#    obviously all deps for NFD
 #
 #   Note:
-#     ndn will be installed globally
+#     nfd will be installed globally
 #
 #
 #############################################################
@@ -23,17 +23,18 @@
 # is ran, it can be ran detached and the designated application will be ran
 
 
-echo "building ndn docker container image ( ndn-base )"
+echo "building NFD docker container image ( nfd-base )"
 
 
 
 ##################
 # set some envs
 ##################
-CONT_NAME="ndn-base"
+CONT_NAME="nfd-base"
 WORKDIR="/ndn"
 
-mkdir $WORKDIR
+# this was run in ndn-base
+#mkdir $WORKDIR
 
 #####################################
 #
@@ -42,19 +43,19 @@ mkdir $WORKDIR
 #####################################
 
 apt update
-apt install -y git python build-essential libboost-all-dev libssl-dev \
-	libsqlite3-dev pkg-config python-minimal vim
+apt -y install build-essential pkg-config libboost-all-dev \
+                     libsqlite3-dev libssl-dev libpcap-dev
+
+git clone --recursive https://github.com/named-data/NFD $WORKDIR/NFD
 
 
-git clone https://github.com/named-data/ndn-cxx.git $WORKDIR/ndn-cxx
-
-cd $WORKDIR/ndn-cxx
+cd $WORKDIR/NFD
 ./waf configure
 ./waf
 ./waf install
 
-ldconfig
+cp /usr/local/etc/ndn/nfd.conf.sample /usr/local/etc/ndn/nfd.conf
 
-# finished
-# ndn-cxx should be installed now
+# NFD should be installed now
+
 

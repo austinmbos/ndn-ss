@@ -1,0 +1,26 @@
+#!/usr/bin/bash
+
+# slightly modified version of nfd-stop
+# sudo removed and pkill subbed in for killall
+
+VERSION="0.6.6-8-g47c343b"
+
+case "$1" in
+  -h)
+    echo Usage
+    echo $0
+    echo "  Stop NFD"
+    exit 0
+    ;;
+  -V)
+    echo $VERSION
+    exit 0
+    ;;
+  "") ;; # do nothing
+  *)
+    echo "Unrecognized option $1"
+    exit 1
+    ;;
+esac
+
+pkill nfd
