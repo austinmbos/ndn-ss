@@ -3,3 +3,7 @@ p
 c
 ms
 keys/test
+__pycache__
+*.pyc
+*.json
+*.log
