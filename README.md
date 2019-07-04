@@ -60,3 +60,9 @@ sudo apt install docker.io
 - Additional notes on each container or service can be found in its
   corresponding dir under the docker/ dir
 
+## perf-test
+- This is where code for running performance tests are
+- The tests are comparisons between mircoservice running on bare metal and in
+  docker containers.
+- Docs and Dockerfiles are there to create the needed containers
+- Helper scripts are there to run the tests in an easy and repeatable manner.
