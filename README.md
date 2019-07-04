@@ -23,6 +23,7 @@
 - Building first microservice ( signature verification )
 - How to take initial interest, pass data through service chain and return back
   to the user
+- Tests to compare performance between bare metal and container
 
 ## Getting started
 
