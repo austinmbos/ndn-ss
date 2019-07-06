@@ -77,8 +77,8 @@ def get_priv_bytes(priv_key):
 
 def get_pub_bytes(pub_key):
     bytes = pub_key.public_bytes(
-            encoding=serialization.Encoding.Raw,
-            format=serialization.PublicFormat.Raw
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
             )
     return bytes
 

@@ -44,10 +44,14 @@ def gen_for_sign( data_size, number_of_sets , filename ):
     priv_key_bytes = get_priv_bytes(priv_key)
     pub_key_bytes = get_pub_bytes(pub_key)
 
+    priv_key_bytes = base64.b64encode(priv_key_bytes).decode('ascii')
+    pub_key_bytes = base64.b64encode(pub_key_bytes).decode('ascii')
+
+
     to_store = {"data_size":data_size,
                 "number_of_sets":number_of_sets,
-                "priv_key":str(priv_key_bytes),
-                "pub_key":str(pub_key_bytes),
+                "priv_key":priv_key_bytes,
+                "pub_key":pub_key_bytes,
                 "data_list":[]}
 
 
@@ -65,14 +69,16 @@ def gen_for_sign( data_size, number_of_sets , filename ):
 
 if __name__ == "__main__":
 
-    cont_size = 10000
-    it = 1000
 
     sym_filename = "list_of_data.json"
     sign_filename = "signed_data.json"
 
-    gen_for_sym_enc(cont_size,it,sym_filename)
-    #gen_for_sign(cont_size,it,sign_filename)
+    #gen_for_sym_enc(10000,1000,"10000-1000-"+sym_filename)
+    #gen_for_sym_enc(10000,100,"10000-100-"+sym_filename)
+    #gen_for_sym_enc(10000,10,"10000-10-"+sym_filename)
+
+
+    gen_for_sign(10000,1000,"10000-1000-"+sign_filename)
 
 
 

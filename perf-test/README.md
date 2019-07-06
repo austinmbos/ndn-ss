@@ -1,3 +1,12 @@
+# TODO:
+- Build a script in each dir to perform the tests
+	- It should get the necessary data
+	- Run on the host
+	- remove a previous image ( if exists )
+	- build the docker image
+	- Run the docker test
+	- Consilidate the results
+
 # Performance testing of microservices on bare metal and docker containers
 
 - In each dir is instructions to run the microservice on bare metal or to use
@@ -26,10 +35,19 @@ docker volume ls
 ```
 docker run -d -v results:/app/results {docker-images}
 ```
+- NOTE: if you run on host BEFORE building the docker image, all the files will
+  be copied over to the docker image, and when run, all the results will be
+  available under the used docker volume storage
+- Because of the previous, make sure a .docker. is attached to the log filename
 
 ## List of microservices
-- Sign
-- Sig-Ver
-- Sym-Enc
-- Sym-Dec
+- sign
+- sig-ver
+- sym-enc
+- sym-dec
+
+
+## What code is ready to run
+- sign
+- sym-enc
 

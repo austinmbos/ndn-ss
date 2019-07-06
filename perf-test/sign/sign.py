@@ -1,4 +1,8 @@
-
+"""
+Simple sign test
+Reads in a json file, then signs the data in
+each field of the json
+"""
 import random
 import string
 import json
@@ -8,7 +12,6 @@ import time
 
 
 from CryptoUtil import *
-
 
 
 
@@ -32,7 +35,7 @@ def run_sign(filename,logfile):
     end = time.time_ns()
     with open(logfile,"w") as f:
         f.write("Length: " + str(len(data)) + "\n")
-        f.write("time (seconds): " + str( round( (end-start) / 1e9 , 3)) + "\n")
+        f.write("time (seconds): " + str( round( (end-start) / 1e9 , 5)) + "\n")
 
 
 
@@ -57,7 +60,11 @@ if __name__ == "__main__":
         ext += ".log"
 
     # can run multiple tests here
-    run_sign("list_of_data.json","results/10000-1000"+ext)
+    # first number is content size
+    # second number is how long the list is
+    run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+ext)
+    run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+ext);
+    run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+ext);
 
 
 

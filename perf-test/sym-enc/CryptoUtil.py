@@ -12,6 +12,7 @@
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
+from cryptography.hazmat.backends import default_backend
 
 from cryptography.hazmat.primitives import hashes
 
@@ -29,9 +30,6 @@ def create_sym_key_and_iv():
 
 
 def sym_encrypt(key,data):
-    """ just pass in the key and the data
-        returns everything you need to decrypt
-    """
     iv = os.urandom(12)
     encryptor = Cipher(
             algorithms.AES(key),
@@ -77,8 +75,8 @@ def get_priv_bytes(priv_key):
 
 def get_pub_bytes(pub_key):
     bytes = pub_key.public_bytes(
-            encoding=serialization.Encoding.Raw,
-            format=serialization.PublicFormat.Raw
+            encoding=serialization.Encoding.PEM,
+            format=serialization.PublicFormat.SubjectPublicKeyInfo
             )
     return bytes
 
