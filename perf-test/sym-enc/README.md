@@ -1,2 +1,0 @@
-# symetric encryption test
-
