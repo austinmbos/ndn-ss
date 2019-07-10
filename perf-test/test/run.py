@@ -69,15 +69,21 @@ def run_enc(filename,logfile):
     with open(filename,"r") as f:
         data = json.load(f)
 
-    start = time.time_ns()
-    for x in data:
-        sym_encrypt(key,x)
 
-    end = time.time_ns()
+    with open(logfile,"w") as f:
+        sym_encrypt(key,"a") # why is the first one so slow
+        for x in data:
+            start = time.time_ns()
+            sym_encrypt(key,x)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
 
+
+    """
     with open(logfile,"w") as f:
         f.write("Length: " + str(len(data)) + "\n")
         f.write("time (seconds): " +  str(round( (end-start) / 1e9,5)) + "\n")
+    """
     
 
 ##############################################################
@@ -104,15 +110,15 @@ if __name__ == "__main__":
     # can run multiple tests here
     # first number is content size
     # second number is how long the list is
-    run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+ext)
-    run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+ext);
-    run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+ext);
+    #run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+ext)
+    #run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+ext);
+    #run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+ext);
 
-    run_ver("data/10000-1000-signed_data.json","results/sig-ver-10000-1000"+ext)
+    #run_ver("data/10000-1000-signed_data.json","results/sig-ver-10000-1000"+ext)
 
-    run_enc("data/10000-1000-list_of_data.json","results/sym-enc-10000-1000"+ext)
-    run_enc("data/10000-100-list_of_data.json","results/sym-enc-10000-100"+ext)
-    run_enc("data/10000-10-list_of_data.json","results/sym-enc-10000-10"+ext)
+    run_enc("data/10-10-list_of_data.json","results/sym-enc-10-10"+ext)
+    #run_enc("data/10000-100-list_of_data.json","results/sym-enc-10000-100"+ext)
+    #run_enc("data/10000-10-list_of_data.json","results/sym-enc-10000-10"+ext)
 
 
 

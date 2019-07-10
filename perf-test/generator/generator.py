@@ -73,11 +73,13 @@ if __name__ == "__main__":
     sym_filename = "list_of_data.json"
     sign_filename = "signed_data.json"
 
+    
+    gen_for_sym_enc(10,10,"10-10-"+sym_filename)
     #gen_for_sym_enc(10000,1000,"10000-1000-"+sym_filename)
     #gen_for_sym_enc(10000,100,"10000-100-"+sym_filename)
     #gen_for_sym_enc(10000,10,"10000-10-"+sym_filename)
 
-    gen_for_sign(10000,1000,"10000-1000-"+sign_filename)
+    #gen_for_sign(10000,1000,"10000-1000-"+sign_filename)
 
 
 
