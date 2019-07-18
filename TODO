@@ -1,13 +1,9 @@
 1. try pyNDN app in docker container without NFD
 
-
 run tests for performance of docker containers
 
-finish building microservices:
-	build an api for them, very simple api using flask and json
-
+finish all microservices
 
 once microservices api is up and running, build application
-
 
 application is going to be anonymous communication using encrypted proxy in ndn
