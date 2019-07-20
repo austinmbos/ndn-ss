@@ -14,6 +14,15 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.backends import default_backend
 
+
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric import utils
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+
+
+
 from cryptography.hazmat.primitives import hashes
 
 import os
@@ -56,6 +65,43 @@ def sym_decrypt(key,iv,ct,tag):
     return decryptor.update(ct) + decryptor.finalize()
 
 
+def gen_rsa_priv_key():
+    """ Generate a private key
+        default key size is 4096
+        default exponent is 65537
+
+        return: you bet, a private key
+    """
+    priv_key = rsa.generate_private_key(
+            public_exponent=65537,
+            key_size=4096,
+            backend=default_backend()
+            )
+
+    return priv_key
+
+
+def rsa_enc(pub_key,data):
+    ct = pub_key.encrypt(bytes(data,'utf-8'),
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+            )
+        )
+
+    return ct
+
+def rsa_dec(priv_key,ct):
+    pt = priv_key.decrypt(ct,
+            padding.OAEP(
+                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+                algorithm=hashes.SHA256(),
+                label=None
+                )
+            )
+    return pt
+
 def gen_priv_key():
     priv_key = Ed25519PrivateKey.generate()
     return priv_key
@@ -91,15 +137,14 @@ def load_pub_key(pub_key_bytes):
 if __name__ == "__main__":
     print("CryptoUtil")
 
-    priv_key = gen_priv_key()
-    pub_key = get_pub_key(priv_key)
-    data = "aaaa"
-    data_2 = "aa"
-    sig = priv_key.sign(bytes(data,"utf-8"))
-    status = pub_key.verify(sig,bytes(data,"utf-8"))
+    priv_key = gen_rsa_priv_key()
+    pub_key = priv_key.public_key()
 
-    print(status)
-    
+    data = "test"
+    ct = rsa_enc(pub_key,data)
+    pt = rsa_dec(priv_key,ct)
+    print(pt)
+   
 
 
     

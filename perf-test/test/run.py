@@ -9,6 +9,7 @@ import time
 from CryptoUtil import *
 
 ##############################################################
+# 1
 ##############################################################
 def run_sign(filename,logfile):
     """ signed with ed25519
@@ -32,6 +33,7 @@ def run_sign(filename,logfile):
 
         
 ##############################################################
+# 2
 ##############################################################
 def run_ver(filename,logfile):
 
@@ -57,9 +59,9 @@ def run_ver(filename,logfile):
             f.write(str( (end-start) ) + "\n")
 
 
-    return 1
 
 ##############################################################
+# 3
 ##############################################################
 def run_enc(filename,logfile):
     key = create_sym_key()
@@ -77,6 +79,50 @@ def run_enc(filename,logfile):
             f.write(str( (end-start) ) + "\n")
 
 
+##############################################################
+# 4
+##############################################################
+def run_rsa_enc(filename,logfile):
+    priv_key = gen_rsa_priv_key()
+    pub_key = priv_key.public_key()
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+    with open(logfile,"w") as f:
+        rsa_enc(pub_key,"a")
+        for x in data:
+            start = time.time_ns()
+            rsa_enc(pub_key,x)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+
+
+##############################################################
+# 5
+##############################################################
+def run_rsa_dec(filename,logfile):
+    priv_key = gen_rsa_priv_key()
+    pub_key = priv_key.public_key()
+
+    enc_data = []
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+    for x in data:
+        enc_data.append(rsa_enc(pub_key,x))
+
+    with open(logfile,"w") as f:
+        rsa_dec(priv_key,enc_data[0])
+        for x in enc_data:
+            start = time.time_ns()
+            rsa_dec(priv_key,x)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+    
 
 ##############################################################
 ##############################################################
@@ -102,11 +148,22 @@ if __name__ == "__main__":
     # can run multiple tests here
     # first number is content size
     # second number is how long the list is
+
+    run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10000-1000"+ext)
+    run_rsa_enc("data/10-100-list_of_data.json","results/rsa-enc-10000-100"+ext)
+    run_rsa_enc("data/10-10-list_of_data.json","results/rsa-enc-10000-10"+ext)
+
+    run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10000-1000"+ext)
+    run_rsa_dec("data/10-100-list_of_data.json","results/rsa-dec-10000-100"+ext)
+    run_rsa_dec("data/10-10-list_of_data.json","results/rsa-dec-10000-10"+ext)
+
     run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+ext)
     run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+ext);
     run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+ext);
 
     run_ver("data/10000-1000-signed_data.json","results/sig-ver-10000-1000"+ext)
+    run_ver("data/10000-100-signed_data.json","results/sig-ver-10000-100"+ext)
+    run_ver("data/10000-10-signed_data.json","results/sig-ver-10000-10"+ext)
 
     run_enc("data/10000-1000-list_of_data.json","results/sym-enc-10000-1000"+ext)
     run_enc("data/10000-100-list_of_data.json","results/sym-enc-10000-100"+ext)
