@@ -14,6 +14,7 @@ from CryptoUtil import *
 def run_sign(filename,logfile):
     """ signed with ed25519
     """
+    print("Running sign")
     
     data = {}
 
@@ -36,6 +37,7 @@ def run_sign(filename,logfile):
 # 2
 ##############################################################
 def run_ver(filename,logfile):
+    print("Running sig verify")
 
     with open(filename,"r") as f:
         file = json.load(f)
@@ -64,6 +66,7 @@ def run_ver(filename,logfile):
 # 3
 ##############################################################
 def run_enc(filename,logfile):
+    print("Running enc")
     key = create_sym_key()
 
     with open(filename,"r") as f:
@@ -83,6 +86,7 @@ def run_enc(filename,logfile):
 # 4
 ##############################################################
 def run_rsa_enc(filename,logfile):
+    print("run rsa enc")
     priv_key = gen_rsa_priv_key()
     pub_key = priv_key.public_key()
 
@@ -103,6 +107,7 @@ def run_rsa_enc(filename,logfile):
 # 5
 ##############################################################
 def run_rsa_dec(filename,logfile):
+    print("Running dec")
     priv_key = gen_rsa_priv_key()
     pub_key = priv_key.public_key()
 
