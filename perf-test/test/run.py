@@ -130,6 +130,9 @@ def run_rsa_dec(filename,logfile):
     
 
 ##############################################################
+# example:
+# python3 run.py laptop
+# python3 run.py pi docker
 ##############################################################
 if __name__ == "__main__":
     """
@@ -140,43 +143,51 @@ if __name__ == "__main__":
         in one spot for later
     """
 
+
+    if len(sys.argv) == 1:
+        print("No args entered, no machine info will be added,quitting")
+        quit()
+
     # Check if running in docker
     # make sure to pass --docker flag to the Docker file CMD argument
-    ext = ""
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "--docker":
-            ext += ".docker.log"
-    else:
-        ext += ".log"
-
+    ext = "."
     mach = ""
+
+    # attach the machine running this test
+    ext += sys.argv[1]
+
+    # attach the docker ".docker" to the file extension
     if len(sys.argv) > 2:
-        mach = sys.argv[2]
+        ext += "."
+        ext += sys.argv[2]
+
+    ext += ".log"
+
 
 
     # can run multiple tests here
     # first number is content size
     # second number is how long the list is
 
-    run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10000-1000"+mach+ext)
-    run_rsa_enc("data/10-100-list_of_data.json","results/rsa-enc-10000-100"+mach+ext)
-    run_rsa_enc("data/10-10-list_of_data.json","results/rsa-enc-10000-10"+mach+ext)
+    run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10000-1000"+ext)
+    run_rsa_enc("data/10-100-list_of_data.json","results/rsa-enc-10000-100"+ext)
+    run_rsa_enc("data/10-10-list_of_data.json","results/rsa-enc-10000-10"+ext)
 
-    run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10000-1000"+mach+ext)
-    run_rsa_dec("data/10-100-list_of_data.json","results/rsa-dec-10000-100"+mach+ext)
-    run_rsa_dec("data/10-10-list_of_data.json","results/rsa-dec-10000-10"+mach+ext)
+    run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10000-1000"+ext)
+    run_rsa_dec("data/10-100-list_of_data.json","results/rsa-dec-10000-100"+ext)
+    run_rsa_dec("data/10-10-list_of_data.json","results/rsa-dec-10000-10"+ext)
 
-    run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+mach+ext)
-    run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+mach+ext);
-    run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+mach+ext);
+    run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+ext)
+    run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+ext);
+    run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+ext);
 
-    run_ver("data/10000-1000-signed_data.json","results/sig-ver-10000-1000"+mach+ext)
-    run_ver("data/10000-100-signed_data.json","results/sig-ver-10000-100"+mach+ext)
-    run_ver("data/10000-10-signed_data.json","results/sig-ver-10000-10"+mach+ext)
+    run_ver("data/10000-1000-signed_data.json","results/sig-ver-10000-1000"+ext)
+    run_ver("data/10000-100-signed_data.json","results/sig-ver-10000-100"+ext)
+    run_ver("data/10000-10-signed_data.json","results/sig-ver-10000-10"+ext)
 
-    run_enc("data/10000-1000-list_of_data.json","results/sym-enc-10000-1000"+mach+ext)
-    run_enc("data/10000-100-list_of_data.json","results/sym-enc-10000-100"+mach+ext)
-    run_enc("data/10000-10-list_of_data.json","results/sym-enc-10000-10"+mach+ext)
+    run_enc("data/10000-1000-list_of_data.json","results/sym-enc-10000-1000"+ext)
+    run_enc("data/10000-100-list_of_data.json","results/sym-enc-10000-100"+ext)
+    run_enc("data/10000-10-list_of_data.json","results/sym-enc-10000-10"+ext)
 
 
 

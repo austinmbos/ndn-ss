@@ -9,9 +9,9 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
     count=0
 
     if is_docker == True:
-        file = "_data/"+filename+"-"+data_size+"-"+num_of_data+mach+".docker.log"
+        file = "_data/"+filename+"-"+data_size+"-"+num_of_data+"."+mach+".docker.log"
     else:
-        file = "_data/"+filename+"-"+data_size+"-"+num_of_data+".log"
+        file = "_data/"+filename+"-"+data_size+"-"+num_of_data+"."+mach+".log"
 
     with open(file,"r") as f:
         for line in f.readlines():
@@ -33,4 +33,4 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
 
 if __name__ == "__main__":
 
-    tally("sym-enc-laptop","10000","1000",True)
+    tally("sym-enc","laptop","10000","1000",is_docker=False)
