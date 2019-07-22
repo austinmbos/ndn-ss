@@ -7,7 +7,17 @@
 AES in GCM mode ( Galois counter mode )
 AES-GCM is an authenticated cipher
 
+- asymmetric encryption ( rsa encrypt/decrypt )
+RSA 
+public exponent: 65537
+key size: 4096 bit
 
+- asymmetric encryption ( sign/verify )
+Ed25519
+key size: 32 bytes ( 256 bit )
+
+
+- tests run
 
 
 

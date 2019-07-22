@@ -73,17 +73,19 @@ if __name__ == "__main__":
     sym_filename = "list_of_data.json"
     sign_filename = "signed_data.json"
 
+    # first number is the data size
+    # second number is how many of each
     
-    #gen_for_sym_enc(10,1000,"10-1000-"+sym_filename)
-    #gen_for_sym_enc(10,100,"10-100-"+sym_filename)
-    #gen_for_sym_enc(10,10,"10-10-"+sym_filename)
-    #gen_for_sym_enc(10000,1000,"10000-1000-"+sym_filename)
-    #gen_for_sym_enc(10000,100,"10000-100-"+sym_filename)
-    #gen_for_sym_enc(10000,10,"10000-10-"+sym_filename)
+    gen_for_sym_enc(10,1000,"10-1000-"+sym_filename)
+    gen_for_sym_enc(100,1000,"100-1000-"+sym_filename)
 
-    gen_for_sign(10000,1000,"10000-1000-"+sign_filename)
-    gen_for_sign(10000,100,"10000-100-"+sign_filename)
-    gen_for_sign(10000,10,"10000-10-"+sign_filename)
+    gen_for_sym_enc(1000,1000,"1000-1000-"+sym_filename)
+    gen_for_sym_enc(75000,1000,"75000-1000-"+sym_filename)
+    gen_for_sym_enc(2000000,1000,"2000000-1000-"+sym_filename)
+
+    gen_for_sign(1000,1000,"1000-1000-"+sign_filename)
+    gen_for_sign(75000,1000,"75000-1000-"+sign_filename)
+    gen_for_sign(2000000,1000,"2000000-1000-"+sign_filename)
 
 
 
