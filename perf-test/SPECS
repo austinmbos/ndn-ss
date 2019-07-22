@@ -1,0 +1,13 @@
+# Details of the tests
+
+
+## performance unit tests
+
+- symmetric encryption
+AES in GCM mode ( Galois counter mode )
+AES-GCM is an authenticated cipher
+
+
+
+
+
