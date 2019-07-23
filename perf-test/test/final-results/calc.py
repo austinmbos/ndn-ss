@@ -27,10 +27,16 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
     print("Mean:     "+str(mean_val))
     print("Std Dev:  "+str(statistics.stdev(total)))
     #print("Variance: "+str(statistics.variance(total,mean_val)))
+    print("")
 
 
 
 
 if __name__ == "__main__":
 
-    tally("sym-enc","laptop","10000","1000",is_docker=False)
+    tally("sign","top","1000","1000",is_docker=False)
+    tally("sign","laptop","1000","1000",is_docker=True)
+    tally("sign","top","75000","1000",is_docker=False)
+    tally("sign","laptop","75000","1000",is_docker=True)
+    tally("sign","top","2000000","1000",is_docker=False)
+    tally("sign","laptop","2000000","1000",is_docker=True)

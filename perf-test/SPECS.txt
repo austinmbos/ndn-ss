@@ -18,6 +18,22 @@ key size: 32 bytes ( 256 bit )
 
 
 - tests run
+all tests include a list of 1000 content
+
+content sizes for rsa encryption/decryption
+10
+100
+1000
+
+content sizes for symmetric encryption/decryption
+1K
+75K
+2M
+
+content sizes for eliptic curve sign/verify
+1k
+75K
+2M
 
 
 

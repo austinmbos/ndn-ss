@@ -24,6 +24,8 @@ def get_list( data_size, number_of_sets ):
 ##############################################################
 ##############################################################
 def gen_for_sym_enc( data_size, number_of_sets, filename ):
+    print("[*] Gen for symetric encryption")
+    print("[*] data size: " + str(data_size))
     content = get_list( data_size, number_of_sets )
 
     with open(filename,"w") as f:
@@ -35,6 +37,8 @@ def gen_for_sym_enc( data_size, number_of_sets, filename ):
 def gen_for_sign( data_size, number_of_sets , filename ):
     """ signed with ed25519
     """
+    print("[*] Gen for sign/verify tests")
+    print("[*] data size: " + str(data_size))
 
     content = get_list( data_size, number_of_sets )
 

@@ -169,25 +169,25 @@ if __name__ == "__main__":
     # first number is content size
     # second number is how long the list is
 
-    run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10000-1000"+ext)
-    run_rsa_enc("data/10-100-list_of_data.json","results/rsa-enc-10000-100"+ext)
-    run_rsa_enc("data/10-10-list_of_data.json","results/rsa-enc-10000-10"+ext)
+    run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10-1000"+ext)
+    run_rsa_enc("data/100-1000-list_of_data.json","results/rsa-enc-100-1000"+ext)
+    #run_rsa_enc("data/1000-1000-list_of_data.json","results/rsa-enc-1000-1000"+ext)
 
-    run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10000-1000"+ext)
-    run_rsa_dec("data/10-100-list_of_data.json","results/rsa-dec-10000-100"+ext)
-    run_rsa_dec("data/10-10-list_of_data.json","results/rsa-dec-10000-10"+ext)
+    run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10-1000"+ext)
+    run_rsa_dec("data/100-1000-list_of_data.json","results/rsa-dec-100-1000"+ext)
+    #0run_rsa_dec("data/1000-1000-list_of_data.json","results/rsa-dec-1000-1000"+ext)
 
-    run_sign("data/10000-1000-list_of_data.json","results/sign-10000-1000"+ext)
-    run_sign("data/10000-100-list_of_data.json","results/sign-10000-100"+ext);
-    run_sign("data/10000-10-list_of_data.json","results/sign-10000-10"+ext);
+    run_sign("data/1000-1000-list_of_data.json","results/sign-1000-1000"+ext)
+    run_sign("data/75000-1000-list_of_data.json","results/sign-75000-1000"+ext);
+    run_sign("data/2000000-1000-list_of_data.json","results/sign-2000000-1000"+ext);
 
-    run_ver("data/10000-1000-signed_data.json","results/sig-ver-10000-1000"+ext)
-    run_ver("data/10000-100-signed_data.json","results/sig-ver-10000-100"+ext)
-    run_ver("data/10000-10-signed_data.json","results/sig-ver-10000-10"+ext)
+    run_ver("data/10000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
+    run_ver("data/75000-1000-signed_data.json","results/sig-ver-75000-1000"+ext)
+    run_ver("data/2000000-1000-signed_data.json","results/sig-ver-2000000-1000"+ext)
 
-    run_enc("data/10000-1000-list_of_data.json","results/sym-enc-10000-1000"+ext)
-    run_enc("data/10000-100-list_of_data.json","results/sym-enc-10000-100"+ext)
-    run_enc("data/10000-10-list_of_data.json","results/sym-enc-10000-10"+ext)
+    run_enc("data/1000-1000-list_of_data.json","results/sym-enc-1000-1000"+ext)
+    run_enc("data/75000-1000-list_of_data.json","results/sym-enc-75000-1000"+ext)
+    run_enc("data/2000000-1000-list_of_data.json","results/sym-enc-2000000-1000"+ext)
 
 
 
