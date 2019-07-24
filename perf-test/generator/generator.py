@@ -80,15 +80,15 @@ if __name__ == "__main__":
     # first number is the data size
     # second number is how many of each
     
-    gen_for_sym_enc(10,1000,"10-1000-"+sym_filename)
-    gen_for_sym_enc(100,1000,"100-1000-"+sym_filename)
+    #gen_for_sym_enc(10,1000,"10-1000-"+sym_filename)
+    #gen_for_sym_enc(100,1000,"100-1000-"+sym_filename)
 
-    gen_for_sym_enc(1000,1000,"1000-1000-"+sym_filename)
-    gen_for_sym_enc(75000,1000,"75000-1000-"+sym_filename)
-    gen_for_sym_enc(2000000,1000,"2000000-1000-"+sym_filename)
+    #gen_for_sym_enc(1000,1000,"1000-1000-"+sym_filename)
+    #gen_for_sym_enc(75000,1000,"75000-1000-"+sym_filename)
+    #gen_for_sym_enc(2000000,1000,"2000000-1000-"+sym_filename)
 
-    gen_for_sign(1000,1000,"1000-1000-"+sign_filename)
-    gen_for_sign(75000,1000,"75000-1000-"+sign_filename)
+    #gen_for_sign(1000,1000,"1000-1000-"+sign_filename)
+    #gen_for_sign(75000,1000,"75000-1000-"+sign_filename)
     gen_for_sign(2000000,1000,"2000000-1000-"+sign_filename)
 
 

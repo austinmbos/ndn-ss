@@ -19,8 +19,11 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
             count += 1
 
     mean_val = statistics.mean(total)
+    mean_val = mean_val / 10**3
 
 
+    if is_docker:
+        print(" DOCKER ")
     print("test:        " + filename)
     print("data size:   " + data_size)
     print("num of data: " + num_of_data)
@@ -34,9 +37,42 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
 
 if __name__ == "__main__":
 
-    tally("sign","top","1000","1000",is_docker=False)
+    print("== timing in is microseconds ==")
+
+    tally("sign","laptop","1000","1000",is_docker=False)
     tally("sign","laptop","1000","1000",is_docker=True)
-    tally("sign","top","75000","1000",is_docker=False)
+    tally("sign","laptop","75000","1000",is_docker=False)
     tally("sign","laptop","75000","1000",is_docker=True)
-    tally("sign","top","2000000","1000",is_docker=False)
+    tally("sign","laptop","2000000","1000",is_docker=False)
     tally("sign","laptop","2000000","1000",is_docker=True)
+
+    tally("sig-ver","laptop","1000","1000",is_docker=False)
+    tally("sig-ver","laptop","1000","1000",is_docker=True)
+    tally("sig-ver","laptop","75000","1000",is_docker=False)
+    tally("sig-ver","laptop","75000","1000",is_docker=True)
+    tally("sig-ver","laptop","2000000","1000",is_docker=False)
+    tally("sig-ver","laptop","2000000","1000",is_docker=True)
+
+    tally("rsa-enc","laptop","100","1000",is_docker=False)
+    tally("rsa-enc","laptop","100","1000",is_docker=True)
+    tally("rsa-enc","laptop","10","1000",is_docker=False)
+    tally("rsa-enc","laptop","10","1000",is_docker=True)
+
+    tally("rsa-dec","laptop","100","1000",is_docker=False)
+    tally("rsa-dec","laptop","100","1000",is_docker=True)
+    tally("rsa-dec","laptop","10","1000",is_docker=False)
+    tally("rsa-dec","laptop","10","1000",is_docker=True)
+
+    tally("sym-enc","laptop","1000","1000",is_docker=False)
+    tally("sym-enc","laptop","1000","1000",is_docker=True)
+    tally("sym-enc","laptop","75000","1000",is_docker=False)
+    tally("sym-enc","laptop","75000","1000",is_docker=True)
+    tally("sym-enc","laptop","2000000","1000",is_docker=False)
+    tally("sym-enc","laptop","2000000","1000",is_docker=True)
+
+
+
+
+
+
+
