@@ -201,7 +201,7 @@ if __name__ == "__main__":
     #run_sign("data/75000-1000-list_of_data.json","results/sign-75000-1000"+ext);
     #run_sign("data/2000000-1000-list_of_data.json","results/sign-2000000-1000"+ext);
 
-    run_ver("data/10000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
+    run_ver("data/1000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
     #run_ver("data/75000-1000-signed_data.json","results/sig-ver-75000-1000"+ext)
     #run_ver("data/2000000-1000-signed_data.json","results/sig-ver-2000000-1000"+ext)
 
