@@ -85,6 +85,26 @@ def run_enc(filename,logfile):
 ##############################################################
 # 4
 ##############################################################
+def run_dec(filename,logfile):
+    print("Running dec")
+    key = create_sym_key()
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+    with open(logfile,"w") as f:
+        iv,ct,tag = sym_encrypt(key,"a")
+        for x in data:
+            iv,ct,tag = sym_encrypt(key,x)
+            start = time.time_ns()
+            sym_decrypt(key,iv,ct,tag)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+
+##############################################################
+# 5
+##############################################################
 def run_rsa_enc(filename,logfile):
     print("run rsa enc")
     priv_key = gen_rsa_priv_key()
@@ -104,7 +124,7 @@ def run_rsa_enc(filename,logfile):
 
 
 ##############################################################
-# 5
+# 6
 ##############################################################
 def run_rsa_dec(filename,logfile):
     print("Running dec")
@@ -169,25 +189,27 @@ if __name__ == "__main__":
     # first number is content size
     # second number is how long the list is
 
-    run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10-1000"+ext)
+    #run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10-1000"+ext)
     run_rsa_enc("data/100-1000-list_of_data.json","results/rsa-enc-100-1000"+ext)
     #run_rsa_enc("data/1000-1000-list_of_data.json","results/rsa-enc-1000-1000"+ext)
 
-    run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10-1000"+ext)
+    #run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10-1000"+ext)
     run_rsa_dec("data/100-1000-list_of_data.json","results/rsa-dec-100-1000"+ext)
     #0run_rsa_dec("data/1000-1000-list_of_data.json","results/rsa-dec-1000-1000"+ext)
 
     run_sign("data/1000-1000-list_of_data.json","results/sign-1000-1000"+ext)
-    run_sign("data/75000-1000-list_of_data.json","results/sign-75000-1000"+ext);
-    run_sign("data/2000000-1000-list_of_data.json","results/sign-2000000-1000"+ext);
+    #run_sign("data/75000-1000-list_of_data.json","results/sign-75000-1000"+ext);
+    #run_sign("data/2000000-1000-list_of_data.json","results/sign-2000000-1000"+ext);
 
     run_ver("data/10000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
-    run_ver("data/75000-1000-signed_data.json","results/sig-ver-75000-1000"+ext)
-    run_ver("data/2000000-1000-signed_data.json","results/sig-ver-2000000-1000"+ext)
+    #run_ver("data/75000-1000-signed_data.json","results/sig-ver-75000-1000"+ext)
+    #run_ver("data/2000000-1000-signed_data.json","results/sig-ver-2000000-1000"+ext)
 
     run_enc("data/1000-1000-list_of_data.json","results/sym-enc-1000-1000"+ext)
-    run_enc("data/75000-1000-list_of_data.json","results/sym-enc-75000-1000"+ext)
-    run_enc("data/2000000-1000-list_of_data.json","results/sym-enc-2000000-1000"+ext)
+    #run_enc("data/75000-1000-list_of_data.json","results/sym-enc-75000-1000"+ext)
+    #run_enc("data/2000000-1000-list_of_data.json","results/sym-enc-2000000-1000"+ext)
+
+    run_dec("data/1000-1000-list_of_data.json","results/sym-dec-1000-1000"+ext)
 
 
 

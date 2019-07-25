@@ -1,170 +1,40 @@
 == timing in is microseconds ==
-test:        sign
-data size:   1000
-num of data: 1000
-Mean:     47.104073
-Std Dev:  8586.895867093259
+== all tests run 1000 times  ==
+== data size ignored, but    ==
+== was used to calc thruput  ==
+test(laptop): sign
+mean(normal): 48.83
+mean(docker): 56.10
+throughput(normal): 20.48
+throughput(docker): 17.82
 
- DOCKER 
-test:        sign
-data size:   1000
-num of data: 1000
-Mean:     47.800621
-Std Dev:  3605.2573797349246
+test(laptop): sig-ver
+mean(normal): 138.39
+mean(docker): 145.81
+throughput(normal): 7.23
+throughput(docker): 6.86
 
-test:        sign
-data size:   75000
-num of data: 1000
-Mean:     265.003577
-Std Dev:  10569.643504105277
+test(laptop): rsa-enc
+mean(normal): 83.56
+mean(docker): 100.17
+throughput(normal): 1.20
+throughput(docker): 1.00
 
- DOCKER 
-test:        sign
-data size:   75000
-num of data: 1000
-Mean:     270.061463
-Std Dev:  9152.813618760669
+test(laptop): rsa-dec
+mean(normal): 4276.55
+mean(docker): 4537.72
+throughput(normal): 0.02
+throughput(docker): 0.02
 
-test:        sign
-data size:   2000000
-num of data: 1000
-Mean:     6035.609015
-Std Dev:  113300.07876425666
+test(laptop): sym-enc
+mean(normal): 36.92
+mean(docker): 55.12
+throughput(normal): 27.09
+throughput(docker): 18.14
 
- DOCKER 
-test:        sign
-data size:   2000000
-num of data: 1000
-Mean:     6109.426367
-Std Dev:  300287.06341024395
-
-test:        sig-ver
-data size:   1000
-num of data: 1000
-Mean:     132.631807
-Std Dev:  7755.971460948916
-
- DOCKER 
-test:        sig-ver
-data size:   1000
-num of data: 1000
-Mean:     148.741352
-Std Dev:  26893.775158656703
-
-test:        sig-ver
-data size:   75000
-num of data: 1000
-Mean:     234.131326
-Std Dev:  10204.02600145464
-
- DOCKER 
-test:        sig-ver
-data size:   75000
-num of data: 1000
-Mean:     245.87445000000002
-Std Dev:  25894.140659655073
-
-test:        sig-ver
-data size:   2000000
-num of data: 1000
-Mean:     3200.772497
-Std Dev:  56407.65822020871
-
- DOCKER 
-test:        sig-ver
-data size:   2000000
-num of data: 1000
-Mean:     3281.817196
-Std Dev:  229149.52114886983
-
-test:        rsa-enc
-data size:   100
-num of data: 1000
-Mean:     81.369009
-Std Dev:  6145.833969291482
-
- DOCKER 
-test:        rsa-enc
-data size:   100
-num of data: 1000
-Mean:     94.161973
-Std Dev:  6540.275566270411
-
-test:        rsa-enc
-data size:   10
-num of data: 1000
-Mean:     88.091054
-Std Dev:  13590.010421126626
-
- DOCKER 
-test:        rsa-enc
-data size:   10
-num of data: 1000
-Mean:     94.735293
-Std Dev:  7800.042584080196
-
-test:        rsa-dec
-data size:   100
-num of data: 1000
-Mean:     4056.986119
-Std Dev:  228097.52604537574
-
- DOCKER 
-test:        rsa-dec
-data size:   100
-num of data: 1000
-Mean:     4213.7890800000005
-Std Dev:  257217.3558385946
-
-test:        rsa-dec
-data size:   10
-num of data: 1000
-Mean:     4061.3837230000004
-Std Dev:  344318.60128291603
-
- DOCKER 
-test:        rsa-dec
-data size:   10
-num of data: 1000
-Mean:     4251.04999
-Std Dev:  303282.0009316494
-
-test:        sym-enc
-data size:   1000
-num of data: 1000
-Mean:     46.821972
-Std Dev:  16907.401069772674
-
- DOCKER 
-test:        sym-enc
-data size:   1000
-num of data: 1000
-Mean:     54.308453
-Std Dev:  3234.201781422111
-
-test:        sym-enc
-data size:   75000
-num of data: 1000
-Mean:     67.39098299999999
-Std Dev:  7820.838726575181
-
- DOCKER 
-test:        sym-enc
-data size:   75000
-num of data: 1000
-Mean:     87.88968
-Std Dev:  11077.521778102913
-
-test:        sym-enc
-data size:   2000000
-num of data: 1000
-Mean:     1273.344399
-Std Dev:  81664.0736335031
-
- DOCKER 
-test:        sym-enc
-data size:   2000000
-num of data: 1000
-Mean:     1388.5291089999998
-Std Dev:  105889.58175592897
+test(laptop): sym-dec
+mean(normal): 33.80
+mean(docker): 51.94
+throughput(normal): 29.58
+throughput(docker): 19.25
 
