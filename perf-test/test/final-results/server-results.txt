@@ -1,0 +1,40 @@
+== timing in is microseconds ==
+== all tests run 1000 times  ==
+== data size ignored, but    ==
+== was used to calc thruput  ==
+test(server): sign
+mean(normal): 44.73 microseconds
+mean(docker): 44.05 microseconds
+throughput(normal): 22.36 MB/s
+throughput(docker): 22.70 MB/s
+
+test(server): sig-ver
+mean(normal): 124.12 microseconds
+mean(docker): 122.15 microseconds
+throughput(normal): 8.06 MB/s
+throughput(docker): 8.19 MB/s
+
+test(server): rsa-enc
+mean(normal): 84.94 microseconds
+mean(docker): 84.28 microseconds
+throughput(normal): 1.18 MB/s
+throughput(docker): 1.19 MB/s
+
+test(server): rsa-dec
+mean(normal): 4300.18 microseconds
+mean(docker): 4210.31 microseconds
+throughput(normal): 0.02 MB/s
+throughput(docker): 0.02 MB/s
+
+test(server): sym-enc
+mean(normal): 33.38 microseconds
+mean(docker): 34.02 microseconds
+throughput(normal): 29.95 MB/s
+throughput(docker): 29.39 MB/s
+
+test(server): sym-dec
+mean(normal): 31.62 microseconds
+mean(docker): 30.05 microseconds
+throughput(normal): 31.62 MB/s
+throughput(docker): 33.28 MB/s
+

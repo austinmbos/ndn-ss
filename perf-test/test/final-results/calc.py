@@ -9,12 +9,6 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
     docker_total = []
     count=0
     docker_count=0
-    """
-    if is_docker == True:
-        file = "_data/"+filename+"-"+data_size+"-"+num_of_data+"."+mach+".docker.log"
-    else:
-        file = "_data/"+filename+"-"+data_size+"-"+num_of_data+"."+mach+".log"
-    """
 
     docker_file = file = "_data/"+filename+"-"+data_size+"-"+num_of_data+"."+mach+".docker.log"
 
@@ -54,21 +48,6 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
     print("")
 
 
-    """
-    if is_docker:
-        print("test: " + filename + "  RUN IN DOCKER ")
-    else:
-        print("test:        " + filename)
-    #print("data size:   " + data_size)
-    #print("num of data: " + str(num_of_data))
-    print("Mean:        %.2f" % mean_val)
-    print("through put: %.2f" % thru_put)
-    #print("Std Dev:     %.2f" % statistics.stdev(total))
-    #print("Variance: "+str(statistics.variance(total,mean_val)))
-    print("")
-    """
-
-
 
 
 if __name__ == "__main__":
@@ -79,38 +58,19 @@ if __name__ == "__main__":
     print("== was used to calc thruput  ==")
 
     tally("sign","laptop","1000","1000",is_docker=False)
-    #tally("sign","laptop","1000","1000",is_docker=True)
-    #tally("sign","laptop","75000","1000",is_docker=False)
-    #tally("sign","laptop","75000","1000",is_docker=True)
-    #tally("sign","laptop","2000000","1000",is_docker=False)
-    #tally("sign","laptop","2000000","1000",is_docker=True)
+    tally("sign","server","1000","1000",is_docker=False)
 
+    """
     tally("sig-ver","laptop","1000","1000",is_docker=False)
-    #tally("sig-ver","laptop","1000","1000",is_docker=True)
-    #tally("sig-ver","laptop","75000","1000",is_docker=False)
-    #tally("sig-ver","laptop","75000","1000",is_docker=True)
-    #tally("sig-ver","laptop","2000000","1000",is_docker=False)
-    #tally("sig-ver","laptop","2000000","1000",is_docker=True)
 
     tally("rsa-enc","laptop","100","1000",is_docker=False)
-    #tally("rsa-enc","laptop","100","1000",is_docker=True)
-    #tally("rsa-enc","laptop","10","1000",is_docker=False)
-    #tally("rsa-enc","laptop","10","1000",is_docker=True)
 
     tally("rsa-dec","laptop","100","1000",is_docker=False)
-    #tally("rsa-dec","laptop","100","1000",is_docker=True)
-    #tally("rsa-dec","laptop","10","1000",is_docker=False)
-    #tally("rsa-dec","laptop","10","1000",is_docker=True)
 
     tally("sym-enc","laptop","1000","1000",is_docker=False)
-    #tally("sym-enc","laptop","1000","1000",is_docker=True)
-    #tally("sym-enc","laptop","75000","1000",is_docker=False)
-    #tally("sym-enc","laptop","75000","1000",is_docker=True)
-    #tally("sym-enc","laptop","2000000","1000",is_docker=False)
-    #tally("sym-enc","laptop","2000000","1000",is_docker=True)
 
     tally("sym-dec","laptop","1000","1000",is_docker=False)
-    #tally("sym-dec","laptop","1000","1000",is_docker=True)
+    """
 
 
 

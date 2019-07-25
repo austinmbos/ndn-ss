@@ -3,12 +3,11 @@
 #############################
 ## cpu information
 #############################
-- server grade - digital ocean tests ( intel xeon ?? )
-
-
+- server grade - digital ocean tests
+Intel(R) Xeon(R) Platinum 8168 CPU @ 2.70GHz
 
 - laptop tests (x86_64)
-intel i7-6700HQ @ 2.60GHz 
+Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
 
 
 - raspberry pi test ( armv7 )
