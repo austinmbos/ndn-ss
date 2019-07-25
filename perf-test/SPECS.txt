@@ -1,7 +1,23 @@
 # Details of the tests
 
+#############################
+## cpu information
+#############################
+- server grade - digital ocean tests ( intel xeon ?? )
 
+
+
+- laptop tests (x86_64)
+intel i7-6700HQ @ 2.60GHz 
+
+
+- raspberry pi test ( armv7 )
+
+
+
+#############################
 ## performance unit tests
+#############################
 
 - symmetric encryption
 AES in GCM mode ( Galois counter mode )
