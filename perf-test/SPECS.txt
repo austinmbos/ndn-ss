@@ -1,6 +1,13 @@
 # Details of the tests
 
 #############################
+## OS information
+#############################
+- Pop!_OS 19.04  ( built on Ubuntu 19.04 )
+Used since python3.7 is the default
+- Python 3.7 version was used 
+
+#############################
 ## cpu information
 #############################
 - server grade - digital ocean tests
