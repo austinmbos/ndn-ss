@@ -26,10 +26,10 @@ def run_sign(filename,logfile):
     with open(logfile,"w") as f:
 
         for x in data:
-            start = time.time_ns()
+            start = time.time()
             priv_key.sign(bytes(x,'utf-8'))
 
-            end = time.time_ns()
+            end = time.time()
             f.write(str( (end-start) ) + "\n")
 
         
@@ -47,7 +47,7 @@ def run_ver(filename,logfile):
 
     with open(logfile,"w") as f:
         for x in file['data_list']:
-            start = time.time_ns()
+            start = time.time()
             data = bytes(x['data'],"utf-8")
             sig = base64.b64decode(x['sig'])
 
@@ -57,7 +57,7 @@ def run_ver(filename,logfile):
                 print("INVALID SIGNATURE: check for errors, there should not\n")
                 print("be invalid signatures for this test")
 
-            end = time.time_ns()
+            end = time.time()
             f.write(str( (end-start) ) + "\n")
 
 
@@ -76,9 +76,9 @@ def run_enc(filename,logfile):
     with open(logfile,"w") as f:
         sym_encrypt(key,"a") # why is the first one so slow
         for x in data:
-            start = time.time_ns()
+            start = time.time()
             sym_encrypt(key,x)
-            end = time.time_ns()
+            end = time.time()
             f.write(str( (end-start) ) + "\n")
 
 
@@ -96,9 +96,9 @@ def run_dec(filename,logfile):
         iv,ct,tag = sym_encrypt(key,"a")
         for x in data:
             iv,ct,tag = sym_encrypt(key,x)
-            start = time.time_ns()
+            start = time.time()
             sym_decrypt(key,iv,ct,tag)
-            end = time.time_ns()
+            end = time.time()
             f.write(str( (end-start) ) + "\n")
 
 
@@ -116,9 +116,9 @@ def run_rsa_enc(filename,logfile):
     with open(logfile,"w") as f:
         rsa_enc(pub_key,"a")
         for x in data:
-            start = time.time_ns()
+            start = time.time()
             rsa_enc(pub_key,x)
-            end = time.time_ns()
+            end = time.time()
             f.write(str( (end-start) ) + "\n")
 
 
@@ -142,9 +142,9 @@ def run_rsa_dec(filename,logfile):
     with open(logfile,"w") as f:
         rsa_dec(priv_key,enc_data[0])
         for x in enc_data:
-            start = time.time_ns()
+            start = time.time()
             rsa_dec(priv_key,x)
-            end = time.time_ns()
+            end = time.time()
             f.write(str( (end-start) ) + "\n")
 
     
@@ -189,27 +189,17 @@ if __name__ == "__main__":
     # first number is content size
     # second number is how long the list is
 
-    #run_rsa_enc("data/10-1000-list_of_data.json","results/rsa-enc-10-1000"+ext)
-    run_rsa_enc("data/100-1000-list_of_data.json","results/rsa-enc-100-1000"+ext)
-    #run_rsa_enc("data/1000-1000-list_of_data.json","results/rsa-enc-1000-1000"+ext)
+    #run_rsa_enc("data/100-1000-list_of_data.json","results/rsa-enc-100-1000"+ext)
 
-    #run_rsa_dec("data/10-1000-list_of_data.json","results/rsa-dec-10-1000"+ext)
-    run_rsa_dec("data/100-1000-list_of_data.json","results/rsa-dec-100-1000"+ext)
-    #0run_rsa_dec("data/1000-1000-list_of_data.json","results/rsa-dec-1000-1000"+ext)
+    #run_rsa_dec("data/100-1000-list_of_data.json","results/rsa-dec-100-1000"+ext)
 
-    run_sign("data/1000-1000-list_of_data.json","results/sign-1000-1000"+ext)
-    #run_sign("data/75000-1000-list_of_data.json","results/sign-75000-1000"+ext);
-    #run_sign("data/2000000-1000-list_of_data.json","results/sign-2000000-1000"+ext);
+    #run_sign("data/1000-1000-list_of_data.json","results/sign-1000-1000"+ext)
 
-    run_ver("data/1000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
-    #run_ver("data/75000-1000-signed_data.json","results/sig-ver-75000-1000"+ext)
-    #run_ver("data/2000000-1000-signed_data.json","results/sig-ver-2000000-1000"+ext)
+    #run_ver("data/1000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
 
     run_enc("data/1000-1000-list_of_data.json","results/sym-enc-1000-1000"+ext)
-    #run_enc("data/75000-1000-list_of_data.json","results/sym-enc-75000-1000"+ext)
-    #run_enc("data/2000000-1000-list_of_data.json","results/sym-enc-2000000-1000"+ext)
 
-    run_dec("data/1000-1000-list_of_data.json","results/sym-dec-1000-1000"+ext)
+    #run_dec("data/1000-1000-list_of_data.json","results/sym-dec-1000-1000"+ext)
 
 
 

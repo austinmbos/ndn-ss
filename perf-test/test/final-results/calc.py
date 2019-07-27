@@ -32,6 +32,7 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
     coeff = 1 / (mean_val / 10**6) 
     thru_put = float(data_size) * coeff
     thru_put = thru_put / 10**6
+    thru_put = thru_put * 8
 
     # docker results
     d_mean_val = statistics.mean(docker_total)
@@ -39,12 +40,13 @@ def tally(filename,mach,data_size,num_of_data,is_docker):
     d_coeff = 1 / (d_mean_val / 10**6) 
     d_thru_put = float(data_size) * d_coeff
     d_thru_put = d_thru_put / 10**6
+    d_thru_put = d_thru_put * 8
 
     print("test("+mach+"): " + filename)
     print("mean(normal): %.2f" % mean_val + " microseconds")
     print("mean(docker): %.2f" % d_mean_val + " microseconds")
-    print("throughput(normal): %.2f" % thru_put + " MB/s")
-    print("throughput(docker): %.2f" % d_thru_put + " MB/s")
+    print("throughput(normal): %.2f" % thru_put + " Mb/s (megabit / second)")
+    print("throughput(docker): %.2f" % d_thru_put + " Mb/s (megabit / second)")
     print("")
 
 
@@ -57,20 +59,19 @@ if __name__ == "__main__":
     print("== data size ignored, but    ==")
     print("== was used to calc thruput  ==")
 
-    tally("sign","laptop","1000","1000",is_docker=False)
-    tally("sign","server","1000","1000",is_docker=False)
+    tally("sign","nsol-mach","1000","1000",is_docker=False)
 
-    """
-    tally("sig-ver","laptop","1000","1000",is_docker=False)
+    tally("sym-enc","nsol-mach","1000","1000",is_docker=False)
 
-    tally("rsa-enc","laptop","100","1000",is_docker=False)
+    tally("sig-ver","nsol-mach","1000","1000",is_docker=False)
 
-    tally("rsa-dec","laptop","100","1000",is_docker=False)
+    tally("rsa-enc","nsol-mach","100","1000",is_docker=False)
 
-    tally("sym-enc","laptop","1000","1000",is_docker=False)
+    tally("rsa-dec","nsol-mach","100","1000",is_docker=False)
 
-    tally("sym-dec","laptop","1000","1000",is_docker=False)
-    """
+    tally("sym-enc","nsol-mach","1000","1000",is_docker=False)
+
+    tally("sym-dec","nsol-mach","1000","1000",is_docker=False)
 
 
 

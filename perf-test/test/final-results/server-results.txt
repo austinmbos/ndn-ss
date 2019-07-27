@@ -3,38 +3,44 @@
 == data size ignored, but    ==
 == was used to calc thruput  ==
 test(server): sign
-mean(normal): 44.73 microseconds
-mean(docker): 44.05 microseconds
-throughput(normal): 22.36 MB/s
-throughput(docker): 22.70 MB/s
-
-test(server): sig-ver
-mean(normal): 124.12 microseconds
-mean(docker): 122.15 microseconds
-throughput(normal): 8.06 MB/s
-throughput(docker): 8.19 MB/s
-
-test(server): rsa-enc
-mean(normal): 84.94 microseconds
-mean(docker): 84.28 microseconds
-throughput(normal): 1.18 MB/s
-throughput(docker): 1.19 MB/s
-
-test(server): rsa-dec
-mean(normal): 4300.18 microseconds
-mean(docker): 4210.31 microseconds
-throughput(normal): 0.02 MB/s
-throughput(docker): 0.02 MB/s
+mean(normal): 43.82 microseconds
+mean(docker): 43.81 microseconds
+throughput(normal): 182.55 Mb/s (megabit / second)
+throughput(docker): 182.62 Mb/s (megabit / second)
 
 test(server): sym-enc
-mean(normal): 33.38 microseconds
-mean(docker): 34.02 microseconds
-throughput(normal): 29.95 MB/s
-throughput(docker): 29.39 MB/s
+mean(normal): 33.07 microseconds
+mean(docker): 32.20 microseconds
+throughput(normal): 241.92 Mb/s (megabit / second)
+throughput(docker): 248.41 Mb/s (megabit / second)
+
+test(server): sig-ver
+mean(normal): 130.54 microseconds
+mean(docker): 124.16 microseconds
+throughput(normal): 61.29 Mb/s (megabit / second)
+throughput(docker): 64.43 Mb/s (megabit / second)
+
+test(server): rsa-enc
+mean(normal): 83.18 microseconds
+mean(docker): 83.95 microseconds
+throughput(normal): 9.62 Mb/s (megabit / second)
+throughput(docker): 9.53 Mb/s (megabit / second)
+
+test(server): rsa-dec
+mean(normal): 4706.72 microseconds
+mean(docker): 4197.10 microseconds
+throughput(normal): 0.17 Mb/s (megabit / second)
+throughput(docker): 0.19 Mb/s (megabit / second)
+
+test(server): sym-enc
+mean(normal): 33.07 microseconds
+mean(docker): 32.20 microseconds
+throughput(normal): 241.92 Mb/s (megabit / second)
+throughput(docker): 248.41 Mb/s (megabit / second)
 
 test(server): sym-dec
-mean(normal): 31.62 microseconds
-mean(docker): 30.05 microseconds
-throughput(normal): 31.62 MB/s
-throughput(docker): 33.28 MB/s
+mean(normal): 29.98 microseconds
+mean(docker): 30.39 microseconds
+throughput(normal): 266.83 Mb/s (megabit / second)
+throughput(docker): 263.25 Mb/s (megabit / second)
 

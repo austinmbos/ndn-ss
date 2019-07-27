@@ -1,0 +1,10 @@
+1. put into docker last
+
+
+2. producer recieves interest`
+	a. writes out data to file
+
+3. micro service chain takes over here
+	a. decrypt
+	b. verify sig ( fake, just pretend its bad sig )
+	c. request final data ( just make up some fake data if success )

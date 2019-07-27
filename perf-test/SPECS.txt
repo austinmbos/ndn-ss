@@ -18,8 +18,10 @@ Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz
 
 
 - raspberry pi test ( armv7 )
+ARMv7 Processor rev 4 (v71) @ 1.2gHz
 
-
+- nsol-machine
+Intel(R) Core(TM) i7-6700K CPU @ 4.00GHz
 
 #############################
 ## performance unit tests

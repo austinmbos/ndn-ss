@@ -1,0 +1,46 @@
+== timing in is microseconds ==
+== all tests run 1000 times  ==
+== data size ignored, but    ==
+== was used to calc thruput  ==
+test(laptop): sign
+mean(normal): 48.83 microseconds
+mean(docker): 56.10 microseconds
+throughput(normal): 163.83 Mb/s (megabit / second)
+throughput(docker): 142.60 Mb/s (megabit / second)
+
+test(laptop): sym-enc
+mean(normal): 36.92 microseconds
+mean(docker): 55.12 microseconds
+throughput(normal): 216.70 Mb/s (megabit / second)
+throughput(docker): 145.14 Mb/s (megabit / second)
+
+test(laptop): sig-ver
+mean(normal): 138.39 microseconds
+mean(docker): 145.81 microseconds
+throughput(normal): 57.81 Mb/s (megabit / second)
+throughput(docker): 54.87 Mb/s (megabit / second)
+
+test(laptop): rsa-enc
+mean(normal): 83.56 microseconds
+mean(docker): 100.17 microseconds
+throughput(normal): 9.57 Mb/s (megabit / second)
+throughput(docker): 7.99 Mb/s (megabit / second)
+
+test(laptop): rsa-dec
+mean(normal): 4276.55 microseconds
+mean(docker): 4537.72 microseconds
+throughput(normal): 0.19 Mb/s (megabit / second)
+throughput(docker): 0.18 Mb/s (megabit / second)
+
+test(laptop): sym-enc
+mean(normal): 36.92 microseconds
+mean(docker): 55.12 microseconds
+throughput(normal): 216.70 Mb/s (megabit / second)
+throughput(docker): 145.14 Mb/s (megabit / second)
+
+test(laptop): sym-dec
+mean(normal): 33.80 microseconds
+mean(docker): 51.94 microseconds
+throughput(normal): 236.67 Mb/s (megabit / second)
+throughput(docker): 154.02 Mb/s (megabit / second)
+

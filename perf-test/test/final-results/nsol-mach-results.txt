@@ -1,0 +1,46 @@
+== timing in is microseconds ==
+== all tests run 1000 times  ==
+== data size ignored, but    ==
+== was used to calc thruput  ==
+test(nsol-mach): sign
+mean(normal): 35.14 microseconds
+mean(docker): 38.52 microseconds
+throughput(normal): 227.67 Mb/s (megabit / second)
+throughput(docker): 207.68 Mb/s (megabit / second)
+
+test(nsol-mach): sym-enc
+mean(normal): 27.44 microseconds
+mean(docker): 43.93 microseconds
+throughput(normal): 291.58 Mb/s (megabit / second)
+throughput(docker): 182.12 Mb/s (megabit / second)
+
+test(nsol-mach): sig-ver
+mean(normal): 97.01 microseconds
+mean(docker): 101.16 microseconds
+throughput(normal): 82.47 Mb/s (megabit / second)
+throughput(docker): 79.08 Mb/s (megabit / second)
+
+test(nsol-mach): rsa-enc
+mean(normal): 66.70 microseconds
+mean(docker): 77.66 microseconds
+throughput(normal): 11.99 Mb/s (megabit / second)
+throughput(docker): 10.30 Mb/s (megabit / second)
+
+test(nsol-mach): rsa-dec
+mean(normal): 3321.10 microseconds
+mean(docker): 3471.08 microseconds
+throughput(normal): 0.24 Mb/s (megabit / second)
+throughput(docker): 0.23 Mb/s (megabit / second)
+
+test(nsol-mach): sym-enc
+mean(normal): 27.44 microseconds
+mean(docker): 43.93 microseconds
+throughput(normal): 291.58 Mb/s (megabit / second)
+throughput(docker): 182.12 Mb/s (megabit / second)
+
+test(nsol-mach): sym-dec
+mean(normal): 26.24 microseconds
+mean(docker): 41.79 microseconds
+throughput(normal): 304.84 Mb/s (megabit / second)
+throughput(docker): 191.45 Mb/s (megabit / second)
+
