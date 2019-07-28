@@ -3,4 +3,4 @@ COPY . /app
 WORKDIR /app
 
 ENTRYPOINT ["python3"]
-CMD ["sym-enc.py"]
+CMD ["sym-dec.py"]

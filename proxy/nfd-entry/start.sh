@@ -9,6 +9,5 @@ echo 1 > final.sem
 sleep 1
 
 hostname -i
-hostname -I
 
 ./p 
