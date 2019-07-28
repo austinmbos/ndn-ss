@@ -50,6 +50,13 @@ private:
 			o_file << *it << "\n";
 		}
 		o_file.close();
+
+		/* once the data is written, release the semaphore for the sig
+		 * ver container */
+		o_file.open("sig-ver.sem");
+		o_file << 0;
+		o_file.close;
+
 	
 
 		Name name(interest.getName());

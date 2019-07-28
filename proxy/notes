@@ -8,3 +8,19 @@
 	a. decrypt
 	b. verify sig ( fake, just pretend its bad sig )
 	c. request final data ( just make up some fake data if success )
+
+
+
+
+
+
+Each container will read their own semaphore file. From this, they well
+determine to procede, or to busy wait/poll. all semaphore files will start 
+with a 1, meaning busy, or wait. Once a procedure is done, modify to a 0 so the
+next service knows it is free and can procede.
+
+
+
+the producer.cpp application, before it returns a data packets, should wait for
+its own semaphore to release. Once it release, the application can return a data
+packet. 
