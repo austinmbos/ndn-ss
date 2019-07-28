@@ -18,6 +18,8 @@ def sigver():
         user_data = json.load(f)
 
 
+    # \r is added somewhere along the line, that
+    # and newlines need to be stripped
     user_name = d[1].rstrip()
     sig = d[-1]
     sig = sig[0:-4]
@@ -31,6 +33,7 @@ def sigver():
 
     user_pub_key.verify(sig,bytes(user_name,'utf-8'))
 
+    # what do now the sig is good ???
 
 
 
