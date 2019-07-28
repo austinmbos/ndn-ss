@@ -43,6 +43,8 @@ private:
 		Name n = interest.getName();
 		ofstream o_file;
 		o_file.open("data.first.txt");
+
+		/* dump the data for the micro service */
 		for(auto it = n.begin(); it != n.end(); it++) {
 			cout << *it << "\n";
 			o_file << *it << "\n";

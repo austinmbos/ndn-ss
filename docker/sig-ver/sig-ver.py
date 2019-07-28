@@ -1,34 +1,37 @@
 
-from flask import Flask, request, jsonify
-import requests
 import base64
-
+import json
 
 
 from CryptoUtil import *
 
 
-app = Flask(__name__)
 
-@app.route('/verify',methods=['POST'])
-def hello_word():
+def sigver():
 
-    sig = request.form['sig']
+    d = []
+    with open("data.first.txt","r") as f:
+        for line in f.readlines():
+            d.append(line)
+
+    with open("system-info.json") as f:
+        user_data = json.load(f)
+
+
+    user_name = d[1].rstrip()
+    sig = d[-1]
+    sig = sig[0:-4]
     sig = base64.b64decode(sig)
-    pub_key = request.form['pub_key']
-    pub_key = base64.b64decode(pub_key)
-    pub_key = load_pub_key(pub_key)
-    data = request.form['data']
+    sig = sig[0:-2]
+    
 
-    try:
-        pub_key.verify(sig,bytes(data,'utf-8'))
-        status = "GOOD"
-    except:
-        status = "BAD"
+    user_pub_key = user_data[user_name]['pub_key']
+    user_pub_key = base64.b64decode(user_pub_key)
+    user_pub_key = load_pub_key(user_pub_key)
+
+    user_pub_key.verify(sig,bytes(user_name,'utf-8'))
 
 
-    return status
 
 
-if __name__ == '__main__':
-    app.run(debug=True,host="0.0.0.0",port=8090)
+sigver()

@@ -46,8 +46,13 @@ def main():
     priv_key = base64.b64decode(priv_key)
     priv_key = load_priv_key(priv_key)
 
-    sig = base64.b64encode(priv_key.sign(bytes(enc_req_name,'utf-8')))
+    #sig = base64.b64encode(priv_key.sign(bytes(enc_req_name,'utf-8')))
+    sig =\
+    base64.b64encode(priv_key.sign(bytes("austin",'utf-8'))).decode('ascii')
     name.append(sig)
+    sig = base64.b64decode(sig)
+    print(sig)
+    quit()
 
     print(name)
 
