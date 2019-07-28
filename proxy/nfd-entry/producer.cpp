@@ -1,7 +1,7 @@
 /*
  * the producer application
  *
- * This is to be run on the host machine
+ * 
  *
  */
 
@@ -55,9 +55,24 @@ private:
 		 * ver container */
 		o_file.open("sig-ver.sem");
 		o_file << 0;
-		o_file.close;
+		o_file.close();
 
-	
+		/* wait here for microservice chain to complete
+		 */
+		// while final.sem == 1 { wait }
+		int lock_status = 1;
+		ifstream in_file;
+		in_file.open("final.sem");
+
+		while(lock_status) {
+			in_file.clear();
+			in_file.seekg(0,ios::beg);
+			in_file >> lock_status;
+			sleep(1);
+		}
+
+		/* should read in final data here, for now return HELLO
+		 */
 
 		Name name(interest.getName());
 		name.append("testing").appendVersion();
@@ -90,6 +105,7 @@ private:
 
 int main(int argc, char *argv[])
 {
+	cout << "=== starting nfd-entry ===\n";
 	Producer producer;
 
 	try {

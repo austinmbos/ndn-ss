@@ -39,7 +39,7 @@ def create_sym_key_and_iv():
 
 
 def sym_encrypt(key,data):
-    iv = os.urandom(12)
+    iv = b'111111111111'
     encryptor = Cipher(
             algorithms.AES(key),
             modes.GCM(iv), 

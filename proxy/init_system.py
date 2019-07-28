@@ -1,4 +1,7 @@
-
+"""
+A Set up the data for the system
+Set up users and thier keys for the tests to run
+"""
 
 import time
 import json
