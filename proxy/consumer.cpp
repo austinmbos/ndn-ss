@@ -29,6 +29,7 @@ public:
 				bind(&Consumer::onTimeout, this, _1));
 
 		//cout << "Sending: " << interest << "\n";
+		keyChain.sign(interest);
 		m_face.processEvents();
 	}
 
@@ -50,6 +51,7 @@ private:
 	}
 
 private:
+	KeyChain keyChain;
 	Face m_face;
 
 

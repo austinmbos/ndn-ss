@@ -13,10 +13,12 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 
 using namespace ndn;
 using namespace std;
+
 
 class Producer : noncopyable
 {
@@ -24,7 +26,7 @@ public:
 
 	void run()
 	{
-		m_face.setInterestFilter("/example/endPoint",
+		m_face.setInterestFilter("/ndn-ss",
 				bind(&Producer::onInterest, this, _1, _2),
 				RegisterPrefixSuccessCallback(),
 				bind(&Producer::onRegisterFailed, this, _1, _2));
@@ -37,6 +39,17 @@ private:
 	void onInterest(const InterestFilter& filter, const Interest& interest)
 	{
 		cout << "[*] Recieved interest\n";
+
+		Name n = interest.getName();
+		ofstream o_file;
+		o_file.open("data.first.txt");
+		for(auto it = n.begin(); it != n.end(); it++) {
+			cout << *it << "\n";
+			o_file << *it << "\n";
+		}
+		o_file.close();
+	
+
 		Name name(interest.getName());
 		name.append("testing").appendVersion();
 

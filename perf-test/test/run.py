@@ -43,7 +43,10 @@ def run_ver(filename,logfile):
         file = json.load(f)
 
     pub_key = base64.b64decode(file['pub_key'])
+    print(pub_key)
     pub_key = load_pub_key(pub_key)
+
+    quit()
 
     with open(logfile,"w") as f:
         for x in file['data_list']:
@@ -195,9 +198,9 @@ if __name__ == "__main__":
 
     #run_sign("data/1000-1000-list_of_data.json","results/sign-1000-1000"+ext)
 
-    #run_ver("data/1000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
+    run_ver("data/1000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
 
-    run_enc("data/1000-1000-list_of_data.json","results/sym-enc-1000-1000"+ext)
+    #run_enc("data/1000-1000-list_of_data.json","results/sym-enc-1000-1000"+ext)
 
     #run_dec("data/1000-1000-list_of_data.json","results/sym-dec-1000-1000"+ext)
 
