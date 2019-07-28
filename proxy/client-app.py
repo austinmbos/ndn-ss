@@ -29,6 +29,7 @@ class Counter(object):
     def onData(self,interest,data):
         self.rec = 0
         print("Got a packet")
+        print(data.getContent())
 
     def onTimeout(self,interest):
         print("Timeout..")
@@ -37,7 +38,7 @@ def main():
 
     #Interest.setDefaultCanBePrefix(True)
 
-    with open("system-info.json") as f:
+    with open("shared/system-info.json") as f:
         user_data = json.load(f)
 
     face = Face()
@@ -47,22 +48,13 @@ def main():
     req_name = "/example/test"
     sym_key = base64.b64decode(user_data['austin']['sym_key'])
     iv,ct,tag = sym_encrypt(sym_key,req_name)
-    print(iv)
-    print(ct)
-    print(tag)
 
     enc_req_name = base64.b64encode(iv).decode('ascii') 
-    print(enc_req_name)
     name.append(enc_req_name)
-    print(name)
     enc_req_name = base64.b64encode(ct).decode('ascii') 
-    print(enc_req_name)
     name.append(enc_req_name)
-    print(name)
     enc_req_name = base64.b64encode(tag).decode('ascii')
-    print(enc_req_name)
     name.append(enc_req_name)
-    print(name)
 
     
     priv_key = user_data['austin']['priv_key']
