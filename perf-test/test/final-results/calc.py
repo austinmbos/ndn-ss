@@ -59,19 +59,19 @@ if __name__ == "__main__":
     print("== data size ignored, but    ==")
     print("== was used to calc thruput  ==")
 
-    tally("sign","nsol-mach","1000","1000",is_docker=False)
+    tally("sign","laptop","1000","1000",is_docker=False)
 
-    tally("sym-enc","nsol-mach","1000","1000",is_docker=False)
+    tally("sym-enc","laptop","1000","1000",is_docker=False)
 
-    tally("sig-ver","nsol-mach","1000","1000",is_docker=False)
+    tally("sig-ver","laptop","1000","1000",is_docker=False)
 
-    tally("rsa-enc","nsol-mach","100","1000",is_docker=False)
+    tally("rsa-enc","laptop","100","1000",is_docker=False)
 
-    tally("rsa-dec","nsol-mach","100","1000",is_docker=False)
+    tally("rsa-dec","laptop","100","1000",is_docker=False)
 
-    tally("sym-enc","nsol-mach","1000","1000",is_docker=False)
+    tally("sym-enc","laptop","1000","1000",is_docker=False)
 
-    tally("sym-dec","nsol-mach","1000","1000",is_docker=False)
+    tally("sym-dec","laptop","1000","1000",is_docker=False)
 
 
 
