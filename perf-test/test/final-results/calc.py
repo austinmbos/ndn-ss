@@ -61,8 +61,6 @@ if __name__ == "__main__":
 
     tally("sign","laptop","1000","1000",is_docker=False)
 
-    tally("sym-enc","laptop","1000","1000",is_docker=False)
-
     tally("sig-ver","laptop","1000","1000",is_docker=False)
 
     tally("rsa-enc","laptop","100","1000",is_docker=False)
