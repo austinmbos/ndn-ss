@@ -1,5 +1,12 @@
 # ndn-ss ( ndn micro services )
 
+## important note
+- To run ndn application inside container, you need shared libs, and shared
+  volume
+```
+docker run -v /run:/run {options} {container name}
+```
+
 - Notes and questions at the bottom of README
 - Questions and topics are kept in a google doc ( add link here ? )
 - services will have an ndn container at the entry and exit running NFD

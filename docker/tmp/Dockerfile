@@ -1,4 +1,6 @@
-From ubuntu:19.04
+From ndn-base
 COPY . /app
 WORKDIR /app
-CMD ["./p"]
+RUN make
+EXPOSE 6363/udp
+ENTRYPOINT ["/bin/bash"]
