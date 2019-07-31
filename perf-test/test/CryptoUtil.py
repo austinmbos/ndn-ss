@@ -11,12 +11,15 @@
 """
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.primitives.ciphers import Cipher,algorithms,modes
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.backends import default_backend
 
 
+
 from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.asymmetric import padding as padd
+from cryptography.hazmat.primitives import padding
 from cryptography.hazmat.primitives.asymmetric import utils
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.hazmat.primitives import serialization
@@ -36,6 +39,45 @@ def create_sym_key():
 
 def create_sym_key_and_iv():
     return os.urandom(32), os.urandom(16)
+
+def sym_encrypt_ChaCha(key,data):
+    nonce = b'1111111111111111'
+    data = bytes(data,"utf-8")
+    algo = algorithms.ChaCha20(key,nonce)
+    cipher = Cipher(algo,mode=None,backend=default_backend())
+    encryptor = cipher.encryptor()
+    ct = encryptor.update(data)
+    return ct
+
+def sym_decrypt_ChaCha(key,data):
+    nonce = b'1111111111111111'
+    algo = algorithms.ChaCha20(key,nonce)
+    cipher = Cipher(algo,mode=None,backend=default_backend())
+    decryptor = cipher.decryptor()
+    pt = decryptor.update(data)
+    return pt
+
+
+def sym_encrypt_CBC(key,data):
+    padder = padding.PKCS7(256).padder()
+    data = padder.update(bytes(data,"utf-8"))
+    backend = default_backend()
+    #iv = os.urandom(16)
+    iv = b'1111111111111111'
+    cipher = Cipher(algorithms.AES(key),modes.CBC(iv),backend=backend)
+    encryptor = cipher.encryptor()
+    ct = encryptor.update(data) + encryptor.finalize()
+
+    return iv, ct
+
+def sym_decrypt_CBC(iv,key,data):
+    # should be depadded
+    iv = b'1111111111111111'
+    backend=default_backend()
+    cipher = Cipher(algorithms.AES(key),modes.CBC(iv),backend=backend)
+    decryptor = cipher.decryptor()
+    pt = decryptor.update(data) + decryptor.finalize()
+    return pt
 
 
 def sym_encrypt(key,data):
@@ -83,8 +125,8 @@ def gen_rsa_priv_key():
 
 def rsa_enc(pub_key,data):
     ct = pub_key.encrypt(bytes(data,'utf-8'),
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            padd.OAEP(
+                mgf=padd.MGF1(algorithm=hashes.SHA256()),
                 algorithm=hashes.SHA256(),
                 label=None
             )
@@ -94,8 +136,8 @@ def rsa_enc(pub_key,data):
 
 def rsa_dec(priv_key,ct):
     pt = priv_key.decrypt(ct,
-            padding.OAEP(
-                mgf=padding.MGF1(algorithm=hashes.SHA256()),
+            padd.OAEP(
+                mgf=padd.MGF1(algorithm=hashes.SHA256()),
                 algorithm=hashes.SHA256(),
                 label=None
                 )
@@ -137,12 +179,10 @@ def load_pub_key(pub_key_bytes):
 if __name__ == "__main__":
     print("CryptoUtil")
 
-    priv_key = gen_rsa_priv_key()
-    pub_key = priv_key.public_key()
-
-    data = "test"
-    ct = rsa_enc(pub_key,data)
-    pt = rsa_dec(priv_key,ct)
+    key = create_sym_key()
+    ct = sym_encrypt_ChaCha(key,"a secret message")
+    print(ct)
+    pt = sym_decrypt_ChaCha(key,ct)
     print(pt)
    
 

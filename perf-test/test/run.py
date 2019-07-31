@@ -61,6 +61,84 @@ def run_ver(filename,logfile):
             end = time.time_ns()
             f.write(str( (end-start) ) + "\n")
 
+##############################################################
+# ???
+##############################################################
+def run_enc_ChaCha(filename,logfile):
+    print("Running enc with ChaCha")
+    key = create_sym_key()
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+
+    with open(logfile,"w") as f:
+        sym_encrypt_ChaCha(key,"a") # why is the first one so slow
+        for x in data:
+            start = time.time_ns()
+            sym_encrypt_ChaCha(key,x)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+##############################################################
+# ???
+##############################################################
+def run_dec_ChaCha(filename,logfile):
+    print("Running dec with ChaCha")
+    key = create_sym_key()
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+    with open(logfile,"w") as f:
+        ct = sym_encrypt_ChaCha(key,"a")
+        for x in data:
+            ct = sym_encrypt_ChaCha(key,x)
+            start = time.time_ns()
+            sym_decrypt_ChaCha(key,ct)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+
+##############################################################
+# ?
+##############################################################
+def run_enc_CBC(filename,logfile):
+    print("Running enc in CBC")
+    key = create_sym_key()
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+
+    with open(logfile,"w") as f:
+        sym_encrypt_CBC(key,"a") # why is the first one so slow
+        for x in data:
+            start = time.time_ns()
+            sym_encrypt_CBC(key,x)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+##############################################################
+# ?
+##############################################################
+def run_dec_CBC(filename,logfile):
+    print("Running dec in CBC")
+    key = create_sym_key()
+
+    with open(filename,"r") as f:
+        data = json.load(f)
+
+    with open(logfile,"w") as f:
+        iv,ct = sym_encrypt_CBC(key,"a")
+        for x in data:
+            iv,ct = sym_encrypt_CBC(key,x)
+            start = time.time_ns()
+            sym_decrypt_CBC(iv,key,ct)
+            end = time.time_ns()
+            f.write(str( (end-start) ) + "\n")
+
+
 
 
 ##############################################################
@@ -190,6 +268,7 @@ if __name__ == "__main__":
     # first number is content size
     # second number is how long the list is
 
+    """
     run_rsa_enc("data/100-1000-list_of_data.json","results/rsa-enc-100-1000"+ext)
 
     run_rsa_dec("data/100-1000-list_of_data.json","results/rsa-dec-100-1000"+ext)
@@ -197,10 +276,17 @@ if __name__ == "__main__":
     run_sign("data/1000-1000-list_of_data.json","results/sign-1000-1000"+ext)
 
     run_ver("data/1000-1000-signed_data.json","results/sig-ver-1000-1000"+ext)
+    """
 
-    run_enc("data/1000-1000-list_of_data.json","results/sym-enc-1000-1000"+ext)
+    run_enc("data/1000-1000-list_of_data.json","results/sym-enc-gcm-1000-1000"+ext)
+    run_enc_CBC("data/1000-1000-list_of_data.json","results/sym-enc-cbc-1000-1000"+ext)
+    run_enc_ChaCha("data/1000-1000-list_of_data.json","results/sym-enc-chacha-1000-1000"+ext)
 
-    run_dec("data/1000-1000-list_of_data.json","results/sym-dec-1000-1000"+ext)
+    run_dec("data/1000-1000-list_of_data.json","results/sym-dec-gcm-1000-1000"+ext)
+    run_dec_CBC("data/1000-1000-list_of_data.json","results/sym-dec-cbc-1000-1000"+ext)
+    run_dec_ChaCha("data/1000-1000-list_of_data.json","results/sym-dec-chacha-1000-1000"+ext)
+
+    
 
 
 

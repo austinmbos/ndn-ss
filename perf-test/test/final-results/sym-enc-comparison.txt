@@ -1,0 +1,40 @@
+== timing in is microseconds ==
+== all tests run 1000 times  ==
+== data size ignored, but    ==
+== was used to calc thruput  ==
+test(laptop): sym-enc-gcm
+mean(normal): 37.85 microseconds
+mean(docker): 59.02 microseconds
+throughput(normal): 211.38 Mb/s (megabit / second)
+throughput(docker): 135.56 Mb/s (megabit / second)
+
+test(laptop): sym-dec-gcm
+mean(normal): 36.06 microseconds
+mean(docker): 55.31 microseconds
+throughput(normal): 221.83 Mb/s (megabit / second)
+throughput(docker): 144.64 Mb/s (megabit / second)
+
+test(laptop): sym-enc-cbc
+mean(normal): 31.46 microseconds
+mean(docker): 46.54 microseconds
+throughput(normal): 254.26 Mb/s (megabit / second)
+throughput(docker): 171.89 Mb/s (megabit / second)
+
+test(laptop): sym-dec-cbc
+mean(normal): 26.54 microseconds
+mean(docker): 41.45 microseconds
+throughput(normal): 301.43 Mb/s (megabit / second)
+throughput(docker): 192.99 Mb/s (megabit / second)
+
+test(laptop): sym-enc-chacha
+mean(normal): 19.11 microseconds
+mean(docker): 34.42 microseconds
+throughput(normal): 418.68 Mb/s (megabit / second)
+throughput(docker): 232.44 Mb/s (megabit / second)
+
+test(laptop): sym-dec-chacha
+mean(normal): 20.32 microseconds
+mean(docker): 32.71 microseconds
+throughput(normal): 393.62 Mb/s (megabit / second)
+throughput(docker): 244.58 Mb/s (megabit / second)
+
