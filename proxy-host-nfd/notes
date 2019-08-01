@@ -1,0 +1,39 @@
+a rewrite of the sytem using a host nfd to communicate with eachother
+
+
+
+two situations to test:
+1. Honest traffic, all with valid signatures
+2. split 50/50 honest and malicious traffic, where malicous has invalid
+signauture
+
+right when the client gets a packet back, send another packet
+
+
+
+1. put into docker last
+
+
+2. producer recieves interest`
+	a. writes out data to file
+
+3. micro service chain takes over here
+	a. decrypt
+	b. verify sig ( fake, just pretend its bad sig )
+	c. request final data ( just make up some fake data if success )
+
+
+
+
+
+
+Each container will read their own semaphore file. From this, they well
+determine to procede, or to busy wait/poll. all semaphore files will start 
+with a 1, meaning busy, or wait. Once a procedure is done, modify to a 0 so the
+next service knows it is free and can procede.
+
+
+
+the producer.cpp application, before it returns a data packets, should wait for
+its own semaphore to release. Once it release, the application can return a data
+packet. 

@@ -12,7 +12,7 @@ public:
   void
   run()
   {
-    Interest interest(Name("/ss/example/testApp/randomData"));
+    Interest interest(Name("/test"));
     interest.setInterestLifetime(2_s); // 2 seconds
     interest.setMustBeFresh(true);
 
