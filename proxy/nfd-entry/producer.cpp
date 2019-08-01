@@ -16,6 +16,23 @@
 using namespace ndn;
 using namespace std;
 
+static void resetFiles()
+{
+	ofstream o_file;
+	
+	o_file.open("shared/sig-ver.sem");
+	o_file << "1";
+	o_file.close();
+
+	o_file.open("shared/sym-dec.sem");
+	o_file << "1";
+	o_file.close();
+
+	o_file.open("shared/final.sem");
+	o_file << "1";
+	o_file.close();
+}
+
 
 class Producer : noncopyable
 {
@@ -41,22 +58,21 @@ private:
 		ofstream o_file;
 		o_file.open("shared/data.first.txt");
 
-		/* dump the data for the micro service */
+		// dump the data for the micro service 
 		for(auto it = n.begin(); it != n.end(); it++) {
 			cout << *it << "\n";
 			o_file << *it << "\n";
 		}
 		o_file.close();
 
-		/* once the data is written, release the semaphore for the sig
-		 * ver container */
+		// once the data is written, release the semaphore for the sig
+		// ver container 
 		o_file.open("shared/sig-ver.sem");
 		o_file << "0";
 		o_file.close();
 		cout << "[*] should have written zero to sig-ver.sem\n";
 
-		/* wait here for microservice chain to complete
-		 */
+		// wait here for microservice chain to complete
 		// while final.sem == 1 { wait }
 		int lock_status = 1;
 		ifstream in_file;
@@ -69,9 +85,10 @@ private:
 			sleep(1);
 		}
 
-		/* should read in final data here, for now return HELLO
-		 */
+		// should read in final data here, for now return HELLO
+		//
 
+		resetFiles();
 		Name name(interest.getName());
 		name.append("testing").appendVersion();
 

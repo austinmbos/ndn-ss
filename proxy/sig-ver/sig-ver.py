@@ -13,19 +13,19 @@ def sigver():
 
 
     # poll, waiting for the semaphore to release
-    with open("shared/sig-ver.sem","r") as f:
+    with open("../nfd-entry/shared/sig-ver.sem","r") as f:
         while int(f.read()) == 1:
             f.seek(0)
             time.sleep(0.5)
 
     # read in the info written by the nfd-entry
     d = []
-    with open("shared/data.first.txt","r") as f:
+    with open("../nfd-entry/shared/data.first.txt","r") as f:
         for line in f.readlines():
             d.append(line)
 
     # read in the user info, including their keys
-    with open("shared/system-info.json") as f:
+    with open("../nfd-entry/shared/system-info.json") as f:
         user_data = json.load(f)
 
 
@@ -47,10 +47,11 @@ def sigver():
     # know they can decrypt and request the data
 
     # this needs testing
-    with open("shared/sym-dec.sem","w") as f:
+    with open("../nfd-entry/shared/sym-dec.sem","w") as f:
         f.write("0")
 
     print("[*] Sig verification was succesfull")
+    time.sleep(1)
 
 
 while(1):
