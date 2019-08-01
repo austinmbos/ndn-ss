@@ -14,7 +14,10 @@ def symdec():
     with open("../nfd-entry/shared/sym-dec.sem","r") as f:
         while int(f.read()) == 1:
             f.seek(0)
-            time.sleep(0.5)
+            time.sleep(0.1)
+
+    with open("../nfd-entry/shared/sym-dec.sem","w") as f:
+        f.write("1")
 
     d = []
     with open("../nfd-entry/shared/data.first.txt","r") as f:
@@ -47,7 +50,7 @@ def symdec():
     print("[*] successful decryption")
     print("[*] requested name: " + pt.decode('ascii'))
 
-    time.sleep(1)
+    #time.sleep(1)
 
 
 

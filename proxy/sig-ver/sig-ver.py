@@ -16,7 +16,10 @@ def sigver():
     with open("../nfd-entry/shared/sig-ver.sem","r") as f:
         while int(f.read()) == 1:
             f.seek(0)
-            time.sleep(0.5)
+            time.sleep(0.1)
+
+    with open("../nfd-entry/shared/sig-ver.sem","w") as f:
+        f.write("1")
 
     # read in the info written by the nfd-entry
     d = []
@@ -41,7 +44,11 @@ def sigver():
     user_pub_key = base64.b64decode(user_pub_key)
     user_pub_key = load_pub_key(user_pub_key)
 
-    user_pub_key.verify(sig,bytes(user_name,'utf-8'))
+    try:
+        user_pub_key.verify(sig,bytes(user_name,'utf-8'))
+    except:
+        print("Invalid signature")
+
 
     # now that we know the sig is good, let the sym decrypt
     # know they can decrypt and request the data
@@ -51,7 +58,8 @@ def sigver():
         f.write("0")
 
     print("[*] Sig verification was succesfull")
-    time.sleep(1)
+
+    #time.sleep(1)
 
 
 while(1):

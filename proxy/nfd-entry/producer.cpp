@@ -33,6 +33,14 @@ static void resetFiles()
 	o_file.close();
 }
 
+static void setLock(string filename,char lock_status)
+{
+	ofstream o_file;
+	o_file.open(filename);
+	o_file << lock_status;
+	o_file.close();
+}
+
 
 class Producer : noncopyable
 {
@@ -60,16 +68,15 @@ private:
 
 		// dump the data for the micro service 
 		for(auto it = n.begin(); it != n.end(); it++) {
-			cout << *it << "\n";
+			//cout << *it << "\n";
 			o_file << *it << "\n";
 		}
 		o_file.close();
 
 		// once the data is written, release the semaphore for the sig
 		// ver container 
-		o_file.open("shared/sig-ver.sem");
-		o_file << "0";
-		o_file.close();
+		//
+		setLock("shared/sig-ver.sem",'0');
 		cout << "[*] should have written zero to sig-ver.sem\n";
 
 		// wait here for microservice chain to complete
@@ -82,8 +89,9 @@ private:
 			in_file.clear();
 			in_file.seekg(0,ios::beg);
 			in_file >> lock_status;
-			sleep(1);
+			sleep(0.1);
 		}
+		
 
 		// should read in final data here, for now return HELLO
 		//
