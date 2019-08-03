@@ -17,6 +17,15 @@ if [ "$1" = "--stop" ]; then
 	exit
 fi
 
+if [ "$1" = "--set-up" ]; then
+	echo "Creating face and route for nfd/docker"
+	nfdc face create udp://172.17.0.2:6363
+	sleep 0.5
+	nfdc route add /ndn-ss udp://172.17.0.2:6363
+	exit
+fi
+
+
 
 #docker run --name nfd_entry -d -v shared:/app/shared nfd-entry
 #docker run --name sig_ver -d -v shared:/app/shared sig-ver

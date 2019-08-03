@@ -63,6 +63,7 @@ private:
 	{
 		cout << "[*] Recieved interest\n";
 
+		/*
 		Name n = interest.getName();
 		ofstream o_file;
 		o_file.open("shared/data.first.txt");
@@ -98,6 +99,7 @@ private:
 		// should read in final data here, for now return HELLO
 
 		resetFiles();
+		*/
 		Name name(interest.getName());
 		name.append("testing").appendVersion();
 

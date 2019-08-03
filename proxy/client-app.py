@@ -30,7 +30,7 @@ class Counter(object):
         print("init")
 
     def onData(self,interest,data):
-        self.rec = 0
+        #self.rec = 0
         print("Got a packet")
         print(data.getContent())
 
@@ -92,7 +92,8 @@ def main():
     while counter.rec == 1:
 
         face.processEvents()
-        time.sleep(0.1)
+        time.sleep(0.5)
+        face.expressInterest(name,counter.onData,counter.onTimeout)
 
 
 
