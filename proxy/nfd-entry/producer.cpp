@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <unistd.h>
 
 
 using namespace ndn;
@@ -85,16 +86,16 @@ private:
 		ifstream in_file;
 		in_file.open("shared/final.sem");
 
+		// wait for the service chain to finish here
 		while(lock_status) {
 			in_file.clear();
 			in_file.seekg(0,ios::beg);
 			in_file >> lock_status;
-			sleep(0.1);
+			usleep(1000);
 		}
 		
 
 		// should read in final data here, for now return HELLO
-		//
 
 		resetFiles();
 		Name name(interest.getName());
@@ -129,6 +130,7 @@ private:
 int main(int argc, char *argv[])
 {
 	cout << "=== starting nfd-entry ===\n";
+	resetFiles();
 
 	Producer producer;
 

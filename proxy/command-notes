@@ -1,0 +1,2 @@
+docker stats --format " $(date +%M:%S) sig-ver {{.CPUPerc}}" sig_ver | tee
+sig-ver.txt

@@ -7,28 +7,29 @@ import urllib.parse
 
 from CryptoUtil import *
 
-
+debug=""
+#debug="../nfd-entry/"
 
 def sigver():
 
 
     # poll, waiting for the semaphore to release
-    with open("../nfd-entry/shared/sig-ver.sem","r") as f:
+    with open("shared/sig-ver.sem","r") as f:
         while int(f.read()) == 1:
             f.seek(0)
             time.sleep(0.1)
 
-    with open("../nfd-entry/shared/sig-ver.sem","w") as f:
+    with open("shared/sig-ver.sem","w") as f:
         f.write("1")
 
     # read in the info written by the nfd-entry
     d = []
-    with open("../nfd-entry/shared/data.first.txt","r") as f:
+    with open("shared/data.first.txt","r") as f:
         for line in f.readlines():
             d.append(line)
 
     # read in the user info, including their keys
-    with open("../nfd-entry/shared/system-info.json") as f:
+    with open("shared/system-info.json") as f:
         user_data = json.load(f)
 
 
@@ -46,18 +47,19 @@ def sigver():
 
     try:
         user_pub_key.verify(sig,bytes(user_name,'utf-8'))
+        print("[*] Sig verification was succesfull. Moving to sym-dec")
+        # now that we know the sig is good, let the sym decrypt
+        # know they can decrypt and request the data
+
+        with open("shared/sym-dec.sem","w") as f:
+            f.write("0")
     except:
-        print("Invalid signature")
+        with open("shared/final.sem","w") as f:
+            f.write("0")
+
+        print("[!] Invalid signature. Alerting producer to return a Fail")
 
 
-    # now that we know the sig is good, let the sym decrypt
-    # know they can decrypt and request the data
-
-    # this needs testing
-    with open("../nfd-entry/shared/sym-dec.sem","w") as f:
-        f.write("0")
-
-    print("[*] Sig verification was succesfull")
 
     #time.sleep(1)
 

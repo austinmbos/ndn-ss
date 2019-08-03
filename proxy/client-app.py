@@ -18,6 +18,9 @@ from pyndn.util import Blob
 import time
 import base64
 import json
+import copy
+
+import sys
 
 from CryptoUtil import *
 
@@ -34,7 +37,11 @@ class Counter(object):
     def onTimeout(self,interest):
         print("Timeout..")
 
+
 def main():
+    if len(sys.argv) < 2:
+        print("usage: python3 client-app.py {good/bad}")
+        quit()
 
     #Interest.setDefaultCanBePrefix(True)
 
@@ -62,12 +69,25 @@ def main():
     priv_key = load_priv_key(priv_key)
 
     sig =\
+    base64.b64encode(priv_key.sign(bytes("austin",'utf-8'))).decode('ascii')
+    
+    #name.append(sig)
+
+    bad_sig =\
     base64.b64encode(priv_key.sign(bytes("abstin",'utf-8'))).decode('ascii')
-    name.append(sig)
 
-    print(name)
 
-    face.expressInterest(name,counter.onData,counter.onTimeout)
+    #face.expressInterest(name,counter.onData,counter.onTimeout)
+
+    if sys.argv[1] == "good":
+        name.append(sig)
+        face.expressInterest(name,counter.onData,counter.onTimeout)
+    elif sys.argv[1] == "bad":
+        name.append(bad_sig)
+        face.expressInterest(name,counter.onData,counter.onTimeout)
+    else:
+        print("c")
+        
 
     while counter.rec == 1:
 
