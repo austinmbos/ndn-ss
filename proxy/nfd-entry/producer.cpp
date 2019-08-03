@@ -63,7 +63,6 @@ private:
 	{
 		cout << "[*] Recieved interest\n";
 
-		/*
 		Name n = interest.getName();
 		ofstream o_file;
 		o_file.open("shared/data.first.txt");
@@ -92,14 +91,13 @@ private:
 			in_file.clear();
 			in_file.seekg(0,ios::beg);
 			in_file >> lock_status;
-			usleep(1000);
+			usleep(100);
 		}
 		
 
 		// should read in final data here, for now return HELLO
 
 		resetFiles();
-		*/
 		Name name(interest.getName());
 		name.append("testing").appendVersion();
 

@@ -17,7 +17,7 @@ def sigver():
     with open("shared/sig-ver.sem","r") as f:
         while int(f.read()) == 1:
             f.seek(0)
-            time.sleep(0.1)
+            time.sleep(0.01)
 
     with open("shared/sig-ver.sem","w") as f:
         f.write("1")

@@ -1,3 +1,9 @@
+"""
+docker cpu monitor tool
+on SIGINT will output the collected data in json format to dockercpu.dat
+for processing
+"""
+
 import json
 import docker
 import threading
@@ -7,9 +13,9 @@ import sys
 
 
 c_data =    {
-                'nfd_entry':[],
-                'sig_ver':[],
-                'sym_dec':[]
+                'nfd_entry':{'time':[],'cpu_perc':[]},
+                'sig_ver'  :{'time':[],'cpu_perc':[]},
+                'sym_dec'  :{'time':[],'cpu_perc':[]},
             }
 
 
@@ -41,10 +47,17 @@ def monitor(cont,data_stream):
         elapsed_time = round( (curr_time - start_time) , 0)
         x = json.loads(x.decode('ascii'))
         try:
+            c_data[cont.name]['time'].append(elapsed_time)
+            c_data[cont.name]['cpu_perc'].append(
+                    round(calculate_cpu_percent(x),3))
+            print("[*] time: " + str(elapsed_time))
+
+            """
             y = \
             {'time':elapsed_time,'cpu_per':round(calculate_cpu_percent(x),3)}
             print(y)
             c_data[cont.name].append(y)
+            """
 
         except:
             print("loading first cpu stats, or something went wrong...")

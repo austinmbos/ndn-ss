@@ -13,9 +13,12 @@ debug=""
 def symdec():
 
     with open("shared/sym-dec.sem","r") as f:
-        while int(f.read()) == 1:
-            f.seek(0)
-            time.sleep(0.1)
+        try:
+            while int(f.read()) == 1:
+                f.seek(0)
+                time.sleep(0.1)
+        except:
+            print("failed reading.. hopefuly still running")
 
     with open("shared/sym-dec.sem","w") as f:
         f.write("1")
