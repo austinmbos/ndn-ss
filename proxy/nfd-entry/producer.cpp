@@ -42,6 +42,7 @@ public:
 
 	void run()
 	{
+		this->m_switch = 1;
 		m_face.setInterestFilter("/ndn-ss",
 				bind(&Producer::onInterest, this, _1, _2),
 				RegisterPrefixSuccessCallback(),
@@ -67,11 +68,15 @@ private:
 		}
 		o_file.close();
 
-		// once the data is written, release the semaphore for the sig
-		// ver container 
-		//
-		setLock("shared/sig-ver.sem",'0');
-		cout << "[*] should have written zero to sig-ver.sem\n";
+		// alert the sig-ver
+		// 2 for sig-ver-1 and 3 for sig-ver-2
+		if(m_switch) {
+			setLock("shared/sig-ver.sem",'2');
+		} else {
+			setLock("shared/sig-ver.sem",'3');
+		}
+		m_switch = !m_switch; // switch between 1 and 0
+		cout << "[*] Wrote switch for sig-ver\n";
 
 		// wait here for microservice chain to complete
 		// while final.sem == 1 { wait }
@@ -115,8 +120,7 @@ private:
 private:
 	Face m_face;
 	KeyChain m_keyChain;
-	int switch; // switch between two sig-ver services
-
+	int m_switch; // switch between two sig-ver services
 };
 
 
