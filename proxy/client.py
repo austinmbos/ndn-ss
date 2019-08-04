@@ -10,11 +10,14 @@ import copy
 import sys
 import threading
 import signal
+import statistics as stat
 
 from CryptoUtil import *
 
 
 quit_flag = 0
+collected_values=[]
+mean_throughput = 0
 
 
 # collecting is done here, gather data now
@@ -22,6 +25,8 @@ def sig_handler(sig,frame):
     print("[!] Recieved SIGINT")
     global quit_flag
     quit_flag = 1
+    mean_throughput = stat.mean(collected_values)
+    print("mean throughput: " + str(round(mean_throughput,3)))
     sys.exit(0);
 
 
@@ -30,7 +35,7 @@ class Consumer(object):
         self.status = 1
         self.count = 1
         self.data_count = 1
-        self.data_rate = 0.20
+        self.data_rate = 0.03
         self.face = Face()
         self.isGood = isGood
 
@@ -113,6 +118,7 @@ class Consumer(object):
 
     # meant to be threaded
     def getThroughput(self):
+        global run_slow
         start = time.time()
         while 1:
             if quit_flag == 1:
@@ -139,26 +145,23 @@ class Consumer(object):
             print("data rate (inverse)   : " + str(self.data_rate))
             print("====================================")
 
-            # if we are receiving a data for every interest on time
-            # increase the data_rate
-            print(str(d_final_count) + "   " + str(final_count))
-            if d_final_count >= final_count:
-                if self.data_rate >= 0.1:
-                    self.data_rate = self.data_rate - 0.05
-                elif self.data_rate < 0.1 and self.data_rate > 0.05:
-                    self.data_rate = self.data_rate - 0.01
-                elif self.data_rate <= 0.05:
-                    self.data_rate = self.data_rate - 0.001
+            collected_values.append(final_count)
+            if run_slow == False: 
 
-            if d_final_count <= final_count - 3:
-                self.data_rate = 0.1
+                # if we are receiving a data for every interest on time
+                # increase the data_rate
+                print(str(d_final_count) + "   " + str(final_count))
+                if d_final_count >= final_count:
+                    if self.data_rate >= 0.1:
+                        self.data_rate = self.data_rate - 0.05
+                    elif self.data_rate < 0.1 and self.data_rate > 0.05:
+                        self.data_rate = self.data_rate - 0.01
+                    elif self.data_rate <= 0.05:
+                        self.data_rate = self.data_rate - 0.001
+
+                if d_final_count <= final_count - 3:
+                    self.data_rate = 0.03
                 
-
-                
-
-
-
-
 
 
 
@@ -166,6 +169,11 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         print("Enter good of bad")
         quit()
+
+    run_slow = False
+    if len(sys.argv) == 3:
+        if sys.argv[2] == "--slow":
+            run_slow = True
 
     if sys.argv[1] == "good":
         isGood = True

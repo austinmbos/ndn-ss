@@ -76,6 +76,7 @@ private:
 			setLock("shared/sig-ver.sem",'3');
 		}
 		m_switch = !m_switch; // switch between 1 and 0
+		m_switch = 1;
 		cout << "[*] Wrote switch for sig-ver\n";
 
 		// wait here for microservice chain to complete

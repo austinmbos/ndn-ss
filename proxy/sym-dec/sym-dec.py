@@ -7,8 +7,14 @@ import urllib.parse
 
 from CryptoUtil import *
 
-#prefix=""
-prefix="../nfd-entry/"
+prefix=""
+#prefix="../nfd-entry/"
+
+
+
+with open(prefix+"shared/system-info.json") as f:
+    user_data = json.load(f)
+
 
 def symdec():
 
@@ -27,9 +33,6 @@ def symdec():
     with open(prefix+"shared/data.first.txt","r") as f:
         for line in f.readlines():
             d.append(line)
-
-    with open(prefix+"shared/system-info.json") as f:
-        user_data = json.load(f)
 
 
     user_name = d[1].rstrip()

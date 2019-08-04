@@ -3,12 +3,22 @@ import base64
 import json
 import time
 import urllib.parse
+import sys
 
 
 from CryptoUtil import *
 
-#prefix=""
-prefix="../nfd-entry/"
+prefix=""
+#prefix="../nfd-entry/"
+
+if len(sys.argv) == 1:
+    print("is this sig-ver-1 OR sig-ver-2 ... need to know")
+    quit()
+
+if sys.argv[1] == "sig-ver-1":
+    my_lock = 2
+elif sys.argv[1] == "sig-ver-2":
+    my_lock = 3
 
 def sigver():
 
@@ -19,7 +29,7 @@ def sigver():
             f.seek(0)
             tmp = f.read()
             try:
-                if int(tmp) == 0:
+                if int(tmp) == my_lock:
                     break;
             except:
                 print("...")
