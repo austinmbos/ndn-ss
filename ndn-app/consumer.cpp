@@ -12,8 +12,8 @@ public:
   void
   run()
   {
-    Interest interest(Name("/test"));
-    interest.setInterestLifetime(2_s); // 2 seconds
+    Interest interest(Name("example/testApp"));
+    interest.setInterestLifetime(0_s); // 2 seconds
     interest.setMustBeFresh(true);
 
     m_face.expressInterest(interest,

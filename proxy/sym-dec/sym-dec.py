@@ -7,12 +7,12 @@ import urllib.parse
 
 from CryptoUtil import *
 
-debug=""
-#debug="../nfd-entry/"
+prefix=""
+#prefix="../nfd-entry/"
 
 def symdec():
 
-    with open("shared/sym-dec.sem","r") as f:
+    with open(prefix+"shared/sym-dec.sem","r") as f:
         try:
             while int(f.read()) == 1:
                 f.seek(0)
@@ -20,15 +20,15 @@ def symdec():
         except:
             print("failed reading.. hopefuly still running")
 
-    with open("shared/sym-dec.sem","w") as f:
+    with open(prefix+"shared/sym-dec.sem","w") as f:
         f.write("1")
 
     d = []
-    with open("shared/data.first.txt","r") as f:
+    with open(prefix+"shared/data.first.txt","r") as f:
         for line in f.readlines():
             d.append(line)
 
-    with open("shared/system-info.json") as f:
+    with open(prefix+"shared/system-info.json") as f:
         user_data = json.load(f)
 
 
@@ -45,10 +45,10 @@ def symdec():
 
     pt = sym_decrypt(sym_key,iv,ct,tag)
 
-    with open("shared/final.text","w") as f:
+    with open(prefix+"shared/final.text","w") as f:
         f.write("FINISHED FINAL DATA")
 
-    with open("shared/final.sem","w") as f:
+    with open(prefix+"shared/final.sem","w") as f:
         f.write("0")
 
     print("[*] successful decryption :: requested name: " + pt.decode('ascii'))

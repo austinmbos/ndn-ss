@@ -12,6 +12,17 @@ import signal
 import sys
 
 
+if len(sys.argv) <= 1:
+    print("Enter good or bad")
+    quit()
+
+
+if sys.argv[1] == "good":
+    output_file = "docker.good.json"
+if sys.argv[1] == "bad":
+    output_file = "docker.bad.json"
+
+
 c_data =    {
                 'nfd_entry':{'time':[],'cpu_perc':[]},
                 'sig_ver'  :{'time':[],'cpu_perc':[]},
@@ -23,10 +34,10 @@ c_data =    {
 # collecting is done here, gather data now
 def sig_handler(sig,frame):
     print("[!] Recieved SIGINT")
-    #print(json.dumps(c_data,indent=4))
-    with open("dockercpu.dat","w") as f:
+    with open(output_file,"w") as f:
         json.dump(c_data,f,indent=4)
     sys.exit(0);
+
 
 def calculate_cpu_percent(d):
     cpu_count = len(d["cpu_stats"]["cpu_usage"]["percpu_usage"])
@@ -50,7 +61,9 @@ def monitor(cont,data_stream):
             c_data[cont.name]['time'].append(elapsed_time)
             c_data[cont.name]['cpu_perc'].append(
                     round(calculate_cpu_percent(x),3))
-            print("[*] time: " + str(elapsed_time))
+            print("[*] time: " + str(elapsed_time) +"  "+ \
+                    str(round(calculate_cpu_percent(x),3)) +"  "+ \
+                    str(cont.name))
 
             """
             y = \

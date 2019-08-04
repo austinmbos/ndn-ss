@@ -71,20 +71,21 @@ def main():
     sig =\
     base64.b64encode(priv_key.sign(bytes("austin",'utf-8'))).decode('ascii')
     
-    #name.append(sig)
-
     bad_sig =\
     base64.b64encode(priv_key.sign(bytes("abstin",'utf-8'))).decode('ascii')
 
+    i = Interest()
+    i.setMustBeFresh(True)
+    i.setInterestLifetimeMilliseconds(0)
 
     #face.expressInterest(name,counter.onData,counter.onTimeout)
 
     if sys.argv[1] == "good":
         name.append(sig)
-        face.expressInterest(name,counter.onData,counter.onTimeout)
+        face.expressInterest(name,i,counter.onData,counter.onTimeout)
     elif sys.argv[1] == "bad":
         name.append(bad_sig)
-        face.expressInterest(name,counter.onData,counter.onTimeout)
+        face.expressInterest(name,i,counter.onData,counter.onTimeout)
     else:
         print("c")
         
@@ -92,8 +93,8 @@ def main():
     while counter.rec == 1:
 
         face.processEvents()
-        time.sleep(0.5)
-        face.expressInterest(name,counter.onData,counter.onTimeout)
+        time.sleep(0.2)
+        face.expressInterest(name,i,counter.onData,counter.onTimeout)
 
 
 

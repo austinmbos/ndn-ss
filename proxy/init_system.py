@@ -22,8 +22,6 @@ pub_key = get_pub_bytes(pub_key)
 priv_key = base64.b64encode(priv_key).decode('ascii')
 pub_key = base64.b64encode(pub_key).decode('ascii')
 
-
-
 users = {'austin': 
             {
                 'sym_key':encoded_sym_key,

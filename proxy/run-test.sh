@@ -7,7 +7,7 @@ fi
 
 # DEFINES
 NUM_TESTS=100
-echo "Running ' $NUM_TESTS ' times "
+#echo "Running ' $NUM_TESTS ' times "
 
 if [ "$1" = "--stop" ]; then
 	echo "Stopping and quitting"
@@ -17,7 +17,16 @@ if [ "$1" = "--stop" ]; then
 	exit
 fi
 
-if [ "$1" = "--set-up" ]; then
+if [ "$1" = "--start" ]; then
+	echo "Starting containers"
+	docker container start nfd_entry
+	docker container start sig_ver
+	docker container start sym_dec
+	exit
+fi
+
+
+if [ "$1" = "--setup" ]; then
 	echo "Creating face and route for nfd/docker"
 	nfdc face create udp://172.17.0.2:6363
 	sleep 0.5

@@ -7,29 +7,36 @@ import urllib.parse
 
 from CryptoUtil import *
 
-debug=""
-#debug="../nfd-entry/"
+prefix=""
+#prefix="../nfd-entry/"
 
 def sigver():
 
 
     # poll, waiting for the semaphore to release
-    with open("shared/sig-ver.sem","r") as f:
-        while int(f.read()) == 1:
+    with open(prefix+"shared/sig-ver.sem","r") as f:
+        while 1:
             f.seek(0)
+            tmp = f.read()
+            try:
+                if int(tmp) == 0:
+                    break;
+            except:
+                print("...")
+
             time.sleep(0.01)
 
-    with open("shared/sig-ver.sem","w") as f:
+    with open(prefix+"shared/sig-ver.sem","w") as f:
         f.write("1")
 
     # read in the info written by the nfd-entry
     d = []
-    with open("shared/data.first.txt","r") as f:
+    with open(prefix+"shared/data.first.txt","r") as f:
         for line in f.readlines():
             d.append(line)
 
     # read in the user info, including their keys
-    with open("shared/system-info.json") as f:
+    with open(prefix+"shared/system-info.json") as f:
         user_data = json.load(f)
 
 
@@ -51,10 +58,10 @@ def sigver():
         # now that we know the sig is good, let the sym decrypt
         # know they can decrypt and request the data
 
-        with open("shared/sym-dec.sem","w") as f:
+        with open(prefix+"shared/sym-dec.sem","w") as f:
             f.write("0")
     except:
-        with open("shared/final.sem","w") as f:
+        with open(prefix+"shared/final.sem","w") as f:
             f.write("0")
 
         print("[!] Invalid signature. Alerting producer to return a Fail")
