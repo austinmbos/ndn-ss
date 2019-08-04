@@ -35,7 +35,7 @@ b = c['sig_ver']['cpu_perc']
 avg = []
 
 for x in range(0,len(a)):
-    avg.append( (a[x]+b[x])/2 )
+    avg.append( (a[x]+b[x]) )
 
 
 
@@ -72,14 +72,14 @@ fig,ax = plt.subplots()
 
 ax.plot(sym_dec_x,sym_dec_y,label="Sym Dec")
 ax.plot(sig_ver_x,sig_ver_y,label="Sig Ver")
-ax.plot(avg_x,avg_y,label="Avg")
+ax.plot(avg_x,avg_y,label="AGG")
 #ax.plot(nfd_entry_x,nfd_entry_y)
 
 ax.legend(loc='upper left')
 
-ax.set(xlabel="Time (seconds)",ylabel='CPU Usage %',title="Usage: "+out_file)
+ax.set(xlabel="Time (seconds)",ylabel='CPU Usage %',title="Scenario: "+out_file.capitalize())
 
-pylab.ylim([0,10])
+pylab.ylim([0,2.5])
 ax.grid()
 fig.savefig(out_file+".png")
 

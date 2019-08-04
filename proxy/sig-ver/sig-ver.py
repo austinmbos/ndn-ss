@@ -24,7 +24,7 @@ def sigver():
             except:
                 print("...")
 
-            time.sleep(0.01)
+            time.sleep(0.1)
 
     with open(prefix+"shared/sig-ver.sem","w") as f:
         f.write("1")

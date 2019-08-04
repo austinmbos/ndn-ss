@@ -93,7 +93,7 @@ def main():
     while counter.rec == 1:
 
         face.processEvents()
-        time.sleep(0.2)
+        time.sleep(0.1)
         face.expressInterest(name,i,counter.onData,counter.onTimeout)
 
 
