@@ -7,8 +7,8 @@ import urllib.parse
 
 from CryptoUtil import *
 
-prefix=""
-#prefix="../nfd-entry/"
+#prefix=""
+prefix="../nfd-entry/"
 
 def sigver():
 

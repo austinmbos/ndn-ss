@@ -1,21 +1,14 @@
-/*
- * the producer application
- */
-
-
 #include <ndn-cxx/face.hpp>
 #include <ndn-cxx/security/key-chain.hpp>
 #include <ndn-cxx/security/signing-info.hpp>
 #include <ndn-cxx/security/v2/key-chain.hpp>
-
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <unistd.h>
-
-
 using namespace ndn;
 using namespace std;
+
 
 static void resetFiles()
 {
@@ -122,6 +115,7 @@ private:
 private:
 	Face m_face;
 	KeyChain m_keyChain;
+	int switch; // switch between two sig-ver services
 
 };
 

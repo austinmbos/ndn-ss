@@ -1,5 +1,15 @@
 """
-process the data from dockercpu.dat
+script to graph data from docker cpu usage
+
+associated files:
+    docker.good.json  ( this is the honest test )
+    docker.bad.json   ( this is the malicious test )
+
+usage:
+    python3 gather.py good ( generate honest graph )
+    python3 gather.py bad  ( generate malicious graph )
+
+
 """
 
 
@@ -25,6 +35,8 @@ if sys.argv[1] == "bad":
     in_file = "docker.bad.json"
     out_file = "malicious"
 
+
+# used for the averaging of data points
 factor = 120
 
 with open(in_file,"r") as f:
@@ -32,10 +44,10 @@ with open(in_file,"r") as f:
 
 a = c['sym_dec']['cpu_perc']
 b = c['sig_ver']['cpu_perc']
-avg = []
+AGG = []
 
 for x in range(0,len(a)):
-    avg.append( (a[x]+b[x]) )
+    AGG.append( (a[x]+b[x]) )
 
 
 
@@ -54,11 +66,11 @@ sig_ver_x = np.linspace(sig_ver_orig.min(),sig_ver_orig.max(),factor)
 spl = make_interp_spline(sig_ver_orig,sig_ver_y,k=3)
 sig_ver_y = spl(sig_ver_x)
 
-avg_orig = np.array(c['sig_ver']['time'][0:offset])
-avg_y = np.array(avg)
-avg_x = np.linspace(avg_orig.min(),avg_orig.max(),factor)
-spl = make_interp_spline(avg_orig,avg_y,k=3)
-avg_y = spl(avg_x)
+AGG_orig = np.array(c['sig_ver']['time'][0:offset])
+AGG_y = np.array(AGG)
+AGG_x = np.linspace(AGG_orig.min(),AGG_orig.max(),factor)
+spl = make_interp_spline(AGG_orig,AGG_y,k=3)
+AGG_y = spl(AGG_x)
 
 
 nfd_entry_orig = np.array(c['nfd_entry']['time'][0:-1])
@@ -72,7 +84,7 @@ fig,ax = plt.subplots()
 
 ax.plot(sym_dec_x,sym_dec_y,label="Sym Dec")
 ax.plot(sig_ver_x,sig_ver_y,label="Sig Ver")
-ax.plot(avg_x,avg_y,label="AGG")
+ax.plot(AGG_x,AGG_y,label="AGG")
 #ax.plot(nfd_entry_x,nfd_entry_y)
 
 ax.legend(loc='upper left')

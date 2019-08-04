@@ -1,5 +1,18 @@
-tests to perform
+arch of multi sig-ver
 
+                 nfd recieve interes
+					 alt-sig-ver
+					/			\
+		 		2				  3
+			sig-ver-1			sig-ver-2
+				\				 /
+				 \              /
+					sym-dec-both
+
+
+
+
+tests to perform
 
 
 
