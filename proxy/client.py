@@ -80,11 +80,11 @@ class Consumer(object):
     def sendInterest_mod(self):
         i = Interest()
         i.setMustBeFresh(True)
-        i.setInterestLifetimeMilliseconds(2000)
+        i.setInterestLifetimeMilliseconds(5000)
         self.buildName()
         self.face.expressInterest(self.name,i,self.onData,self.onTimeout)
         self.status = 1
-        print("[MOD] Sending Interest: "+str(self.count))
+        #print("[MOD] Sending Interest: "+str(self.count))
 
 
     def onData(self,interest,data):
@@ -112,6 +112,7 @@ class Consumer(object):
     def spamInterest(self):
         while 1:
             self.sendInterest()
+            #self.sendInterest_mod()
             time.sleep(self.data_rate)
 
 

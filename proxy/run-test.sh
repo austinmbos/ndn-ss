@@ -9,13 +9,31 @@ fi
 NUM_TESTS=100
 #echo "Running ' $NUM_TESTS ' times "
 
+
+if [ "$1" = "--rebuild" ]; then
+	echo "Rebuilding containers; make sure images are built, and all containers"
+	echo "are stopped and removed/cleaned"
+
+	docker run --name nfd_entry_single -d -v shared:/app/shared nfd-entry-single
+	sleep 5
+	docker container kill nfd_entry_single
+	docker run --name nfd_entry -d -v shared:/app/shared nfd-entry
+	
+	docker run --name sig_ver_1 -d -v shared:/app/shared sig-ver-1
+	docker run --name sig_ver_2 -d -v shared:/app/shared sig-ver-2
+	docker run --name sym_dec   -d -v shared:/app/shared sym-dec
+	exit
+
+fi
+
+
 if [ "$1" = "--clear-logs" ]; then
 	if [[ -z $2 ]]; then
 		echo "No container specified"
 		exit 1
 	fi
 	if [[ "$(docker ps -aq -f name=^/${2}$ 2> /dev/null)" == "" ]]; then
-		echo "Container \"$1\" does not exist, exiting."
+		echo "Container \"$2\" does not exist, exiting."
 		exit 1
 	fi
 	log=$(docker inspect -f '{{.LogPath}}' $2 2> /dev/null)
