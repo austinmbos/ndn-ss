@@ -8,8 +8,9 @@ import sys
 
 from CryptoUtil import *
 
-prefix=""
-#prefix="../nfd-entry/"
+#prefix=""
+prefix="../nfd-entry/"
+count=1
 
 if len(sys.argv) == 1:
     print("is this sig-ver-1 OR sig-ver-2 ... need to know")
@@ -22,7 +23,7 @@ elif sys.argv[1] == "sig-ver-2":
 
 def sigver():
 
-
+    global count
     # poll, waiting for the semaphore to release
     with open(prefix+"shared/sig-ver.sem","r") as f:
         while 1:
@@ -64,7 +65,7 @@ def sigver():
 
     try:
         user_pub_key.verify(sig,bytes(user_name,'utf-8'))
-        print("[*] Sig verification was succesfull. Moving to sym-dec")
+        print("[*] Sig verification was succesfull. Moving to sym-dec  " + str(count))
         # now that we know the sig is good, let the sym decrypt
         # know they can decrypt and request the data
 
@@ -74,8 +75,9 @@ def sigver():
         with open(prefix+"shared/final.sem","w") as f:
             f.write("0")
 
-        print("[!] Invalid signature. Alerting producer to return a Fail")
+        print("[!] Invalid signature. Alerting producer to return a Fail  " + str(count))
 
+    count = count + 1
 
 
     #time.sleep(1)

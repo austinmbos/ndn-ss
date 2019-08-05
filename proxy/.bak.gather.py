@@ -46,18 +46,18 @@ factor = 120
 with open(in_file,"r") as f:
     c = json.load(f)
 
-"""
 a = c['sym_dec']['cpu_perc']
 b = c['sig_ver']['cpu_perc']
 AGG = []
 
 for x in range(0,len(a)):
     AGG.append( (a[x]+b[x]) )
-"""
+
+
 
 
 offset = len(c['sym_dec']['cpu_perc']) - len(c['sym_dec']['time'])
-"""
+
 sym_dec_orig = np.array(c['sym_dec']['time'][0:offset])
 sym_dec_y = np.array(c['sym_dec']['cpu_perc'])
 sym_dec_x = np.linspace(sym_dec_orig.min(),sym_dec_orig.max(),factor)
@@ -91,24 +91,11 @@ ax.plot(sig_ver_x,sig_ver_y,label="Sig Ver")
 ax.plot(AGG_x,AGG_y,label="AGG")
 #ax.plot(nfd_entry_x,nfd_entry_y)
 
-"""
-
-fig,ax = plt.subplots()
-
-
-ax.plot(c['sym_dec']['time'][0:offset],c['sym_dec']['cpu_perc'],label="Sym Dec")
-ax.plot(c['sig_ver_1']['time'][0:offset],c['sig_ver_1']['cpu_perc'],label="Sig ver 1")
-ax.plot(c['sig_ver_2']['time'][0:offset],c['sig_ver_2']['cpu_perc'],label="Sig ver 2")
-ax.plot(c['nfd_entry']['time'][0:offset],c['nfd_entry']['cpu_perc'],label="nfd entry")
-#ax.plot(sig_ver_x,sig_ver_y,label="Sig Ver")
-#ax.plot(AGG_x,AGG_y,label="AGG")
-#ax.plot(nfd_entry_x,nfd_entry_y)
-
 ax.legend(loc='upper left')
 
 ax.set(xlabel="Time (seconds)",ylabel='CPU Usage %',title="Scenario: "+out_file.capitalize())
 
-pylab.ylim([0,5])
+pylab.ylim([0,2.5])
 ax.grid()
 fig.savefig(out_file+".png")
 

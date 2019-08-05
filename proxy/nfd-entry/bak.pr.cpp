@@ -165,6 +165,7 @@ int main(int argc, char *argv[])
 
 	std::fstream tt("test.txt");
 	tt << "lskjdldsjf";
+	exit(0);
 
 	cout << "=== starting nfd-entry ===\n";
 #ifdef SINGLE
@@ -175,16 +176,19 @@ int main(int argc, char *argv[])
 
 
 
-	//cout << "[*] Opening file's\n";
+	cout << "[*] Opening file's\n";
 	fstream inP("shared/in-progress.sem",fstream::in|fstream::out);
 	fstream sV("shared/sig-ver.sem",fstream::in | fstream::out);
 	fstream fF("shared/final.sem",fstream::in|fstream::out);
 	fstream dF("shared/data.first.txt",fstream::in|fstream::out);
-	//cout << "[*] files opened\n";
+	cout << "[*] files opened\n";
 
-	sV << "lskjfkldsfjds\n";
 	sV.flush();
+	sV.clear();
+	sV.seekp(0);
+	sV << "lskjfkldsfjds";
 	exit(0);
+
 
 	Producer producer(inP,sV,fF,dF);
 

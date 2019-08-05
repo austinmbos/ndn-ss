@@ -14,11 +14,9 @@ if [ "$1" = "--rebuild" ]; then
 	echo "Rebuilding containers; make sure images are built, and all containers"
 	echo "are stopped and removed/cleaned"
 
-	docker run --name nfd_entry_single -d -v shared:/app/shared nfd-entry-single
-	sleep 5
-	docker container kill nfd_entry_single
+	# build nfd_entry for double first
 	docker run --name nfd_entry -d -v shared:/app/shared nfd-entry
-	
+	sleep 2
 	docker run --name sig_ver_1 -d -v shared:/app/shared sig-ver-1
 	docker run --name sig_ver_2 -d -v shared:/app/shared sig-ver-2
 	docker run --name sym_dec   -d -v shared:/app/shared sym-dec

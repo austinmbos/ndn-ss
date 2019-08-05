@@ -27,6 +27,8 @@ def sig_handler(sig,frame):
     quit_flag = 1
     mean_throughput = stat.mean(collected_values)
     print("mean throughput: " + str(round(mean_throughput,3)))
+    with open("thru-put.dat","a") as f:
+        f.write(str(mean_throughput)+"\n")
     sys.exit(0);
 
 
@@ -98,6 +100,7 @@ class Consumer(object):
     def onTimeout(self,interest):
         print("\n\n\n\nTimeout...")
         print("Need to reduce rate...")
+        quit_flag = 1
 
 
     # meant to be threaded
@@ -114,6 +117,8 @@ class Consumer(object):
             self.sendInterest()
             #self.sendInterest_mod()
             time.sleep(self.data_rate)
+            if quit_flag == 1:
+                quit()
 
 
 
@@ -145,6 +150,7 @@ class Consumer(object):
             print("time                  : " + str(round(status,3)))
             print("data rate (inverse)   : " + str(self.data_rate))
             print("====================================")
+            
 
             collected_values.append(final_count)
             if run_slow == False: 
@@ -157,8 +163,10 @@ class Consumer(object):
                         self.data_rate = self.data_rate - 0.05
                     elif self.data_rate < 0.1 and self.data_rate > 0.05:
                         self.data_rate = self.data_rate - 0.01
-                    elif self.data_rate <= 0.05:
+                    elif self.data_rate <= 0.05 and self.data_rate > 0.001:
                         self.data_rate = self.data_rate - 0.001
+                    else:
+                        self.data_rate = self.data_rate - 0.0001
 
                 if d_final_count <= final_count - 3:
                     self.data_rate = 0.03

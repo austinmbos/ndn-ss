@@ -21,12 +21,16 @@ if sys.argv[1] == "good":
     output_file = "docker.good.json"
 if sys.argv[1] == "bad":
     output_file = "docker.bad.json"
+if sys.argv[1] == "test":
+    output_file = "docker.test.json"
 
 
 c_data =    {
-                'nfd_entry':{'time':[],'cpu_perc':[]},
-                'sig_ver'  :{'time':[],'cpu_perc':[]},
-                'sym_dec'  :{'time':[],'cpu_perc':[]},
+                'nfd_entry'        :{'time':[],'cpu_perc':[]},
+                #'nfd_entry_single' :{'time':[],'cpu_perc':[]},
+                'sig_ver_1'        :{'time':[],'cpu_perc':[]},
+                'sig_ver_2'        :{'time':[],'cpu_perc':[]},
+                'sym_dec'          :{'time':[],'cpu_perc':[]},
             }
 
 
@@ -88,11 +92,13 @@ if __name__ == "__main__":
     a = d.containers.list()[0]
     b = d.containers.list()[1]
     c = d.containers.list()[2]
+    d = d.containers.list()[3]
 
     # get the streams to read from
     data_one = a.stats()
     data_two = b.stats()
     data_three = c.stats()
+    data_four = d.stats()
             
     t_1 = threading.Thread(target=monitor,args=(a,data_one,))
     t_1.start()
@@ -102,6 +108,9 @@ if __name__ == "__main__":
 
     t_3 = threading.Thread(target=monitor,args=(c,data_three))
     t_3.start()
+
+    t_4 = threading.Thread(target=monitor,args=(d,data_four))
+    t_4.start()
 
 
 

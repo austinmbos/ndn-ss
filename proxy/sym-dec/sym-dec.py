@@ -7,8 +7,8 @@ import urllib.parse
 
 from CryptoUtil import *
 
-prefix=""
-#prefix="../nfd-entry/"
+#prefix=""
+prefix="../nfd-entry/"
 
 
 
@@ -19,12 +19,16 @@ with open(prefix+"shared/system-info.json") as f:
 def symdec():
 
     with open(prefix+"shared/sym-dec.sem","r") as f:
-        try:
-            while int(f.read()) == 1:
-                f.seek(0)
-                time.sleep(0.1)
-        except:
-            print("failed reading.. hopefuly still running")
+        while 1:
+            f.seek(0)
+            tmp = f.read()
+            try:
+                if int(tmp) == 0:
+                    break;
+            except:
+                print("failed reading.. hopefuly still running")
+
+            time.sleep(0.1)
 
     with open(prefix+"shared/sym-dec.sem","w") as f:
         f.write("1")
