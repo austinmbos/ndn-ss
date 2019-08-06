@@ -83,6 +83,7 @@ class Consumer(object):
         i = Interest()
         i.setMustBeFresh(True)
         i.setInterestLifetimeMilliseconds(5000)
+
         self.buildName()
         self.face.expressInterest(self.name,i,self.onData,self.onTimeout)
         self.status = 1
