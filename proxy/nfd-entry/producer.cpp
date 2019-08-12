@@ -184,7 +184,7 @@ int main(int argc, char *argv[])
 
 	sV << "lskjfkldsfjds\n";
 	sV.flush();
-	exit(0);
+	//exit(0);
 
 	Producer producer(inP,sV,fF,dF);
 

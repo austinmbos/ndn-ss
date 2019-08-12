@@ -1,3 +1,13 @@
+
+performance test the process running in docker, and on bare metal
+: look for cache miss, nice value, processor time
+
+
+for AES, run an algorithm that does not depend on AES-NI
+
+
+
+
 edge computing device
 
 
